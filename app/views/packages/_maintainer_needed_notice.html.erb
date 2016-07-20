@@ -1,0 +1,7 @@
+<% if package.needs_maintainer? %>
+  <div class="alert alert-info">
+    <strong><span class="fa fa-fw fa-wrench"></span> This package needs a new maintainer!</strong><br>
+    If you are interested in helping with the maintenance of <%= package.name %>, please get in touch with our
+    <a href="https://wiki.gentoo.org/wiki/Project:Proxy_Maintainers" class="alert-link">Proxy Maintainers team</a>.
+  </div>
+<% end %>

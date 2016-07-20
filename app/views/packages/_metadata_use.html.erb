@@ -1,0 +1,14 @@
+<% unless useflags['local'].empty? %>
+  <span class="kk-useflag-group"><%= t :local_use_flags %></span>
+  <%= render partial: 'useflag', object: useflags['local'], as: 'useflags' %>
+<% end %>
+<% unless useflags['global'].empty? %>
+  <span class="kk-useflag-group"><%= t :global_use_flags %></span>
+  <%= render partial: 'useflag', object: useflags['global'], as: 'useflags' %>
+<% end %>
+<% unless useflags['use_expand'].empty? %>
+  <% useflags['use_expand'].each_pair do |flag, values| %>
+    <span class="kk-useflag-group"><%= t :use_expand_flag, flag: flag %></span>
+    <%= render partial: 'useflag', object: values, as: 'useflags' %>
+  <% end %>
+<% end %>

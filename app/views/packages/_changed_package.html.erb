@@ -1,0 +1,71 @@
+<% unless version.nil? %>
+<li class="list-group-item kk-package-detailed">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <h4 class="stick-top"><%= link_to package.atom, slf(package_path(package.atom)) %></h4>
+      <div class="kk-package-detailed-toolbox">
+        <div class="btn-group">
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fa fa-fw fa-navicon"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="https://bugs.gentoo.org/buglist.cgi?quicksearch=<%= u package.atom %>" target="_blank">
+            <span class="fa fa-fw fa-bug"></span>
+            <%= t :res_bugs %>
+          </a></li>
+          <li><a href="https://wiki.gentoo.org/index.php?title=Special%3ASearch&fulltext=Search&search=<%= u package.name %>" target="_blank">
+            <span class="fa fa-fw fa-book"></span>
+            <%= t :res_docs %>
+          </a></li>
+          <li><a href="https://forums.gentoo.org/search.php?search_terms=all&show_results=topics&search_keywords=<%= u package.name %>&mode=results" target="_blank">
+            <span class="fa fa-fw fa-comments-o"></span>
+            <%= t :res_forums %>
+          </a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="https://gitweb.gentoo.org/repo/gentoo.git/tree/<%= package.atom %>" target="_blank">
+            <span class="fa fa-fw fa-code-fork"></span>
+            <%= t :res_repo %>
+          </a></li>
+          <li><a href="https://gitweb.gentoo.org/repo/gentoo.git/log/<%= package.atom %>?showmsg=1" target="_blank">
+            <span class="fa fa-fw fa-history"></span>
+            <%= t :res_log %>
+          </a></li>
+          <li><a href="https://gitweb.gentoo.org/repo/gentoo.git/atom/<%= package.atom %>?h=master" target="_blank">
+            <span class="fa fa-fw fa-rss"></span>
+            <%= t :res_feed %>
+          </a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="http://www.portagefilelist.de/site/query/listPackageVersions/?category=<%= package.category %>&package=<%= package.name %>&do#result" target="_blank">
+            <span class="fa fa-fw fa-files-o"></span>
+            <%= t :res_installed_files %> <small>(via PFL<span class="fa fa-fw fa-external-link-square"></span>)</small>
+          </a></li>
+        </ul>
+      </div>
+      </div>
+      <%= package.description %>
+      <br>
+      <small class="text-muted">
+        <% unless change.arches == nil or change.arches.empty? %>
+          <%= t :added_keywords, keywords: change.arches.join(', ') %>
+        <% end %>
+      </small>
+      <% unless (changelog_entry = matching_changelog_entry(change)).nil? %>
+      <div class="kk-inline-changelog-entry">
+        <a href="<%= gitweb_commit_url(changelog_entry[:id]) %>" title="<%= t :git_commit %>">
+          <span class="octicon octicon-git-pull-request"></span>
+          <span class="kk-commit-message">
+          <%= changelog_entry[:message].lines.first %>
+          </span>
+        </a>
+      </div>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <small class="text-muted pull-right">
+        <%= i18n_date(change.created_at) %>
+      </small>
+      <%= render partial: 'packages/version_card', object: version, as: 'version' %>
+    </div>
+  </div>
+</li>
+<% end %>

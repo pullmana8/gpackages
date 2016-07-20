@@ -1,0 +1,5 @@
+<ul class="kk-useflag-container <%= useflags.size > 10 ? 'kk-useflag-container-many' : 'kk-useflag-container-few' %>">
+<% useflags.each_pair do |flag, flag_data| %>
+  <li class="kk-useflag"><%= link_to flag, useflag_path(id: flag_data['name']), :title => strip_tags(flag_data['description']), 'data-toggle' => 'tooltip' %></li>
+<% end %>
+</ul>

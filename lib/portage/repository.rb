@@ -1,0 +1,2 @@
+module Portage::Repository
+end

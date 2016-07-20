@@ -1,0 +1,10 @@
+<% unless (_masks = filter_masks(versions)).empty? %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t :box_masks %></h3>
+  </div>
+  <ul class="list-group">
+    <%= render partial: 'mask', collection: _masks.to_a, as: 'mask' %>
+  </ul>
+</div>
+<% end %>

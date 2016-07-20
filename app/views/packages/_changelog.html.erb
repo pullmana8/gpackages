@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Changelog</h3>
+  </div>
+  <ul class="list-group" id="changelog-container">
+    <li class="list-group-item kk-panel-content-sorry">
+      <span class="fa fa-refresh fa-spin fa-3x"></span>
+      <noscript>
+        <br><br>
+        <%= t :changelog_error %>
+        <br><br>
+        <a href="https://gitweb.gentoo.org/repo/gentoo.git/log/<%= @package.atom %>?showmsg=1" class="btn btn-default">
+          <span class="fa fa-fw fa-history"></span>
+          <%= t :view_git_changelog %>
+        </a>
+      </noscript>
+    </li>
+  </ul>
+</div>

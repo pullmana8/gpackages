@@ -1,0 +1,31 @@
+<li class="list-group-item">
+  <strong><%= annotate_bugs changelog[:message].lines.first %></strong>
+  <br>
+  <div class="kk-byline">
+    <%= mail_to changelog[:email], changelog[:author] %>,
+    <%= i18n_date(changelog[:date]) %>,
+    commit&nbsp;<%= link_to_gitweb_commit changelog[:id]%>
+  </div>
+
+  <table class="table table-condensed kk-changelog-diffstat">
+    <% unless changelog[:files][:added].empty? %>
+      <tr class="success">
+        <td class="kk-changelog-diffstat-icon"><span class="octicon octicon-diff-added"></span></td>
+        <td><%= safe_join(changelog[:files][:added].map {|f| link_to_gitweb_ebuild_diff(f, changelog[:id], @package.category, @package.name) }, ', ') %></td>
+      </tr>
+    <% end %>
+    <% unless changelog[:files][:modified].empty? %>
+      <tr class="warning">
+        <td class="kk-changelog-diffstat-icon"><span class="octicon octicon-diff-modified"></span></td>
+        <td><%= safe_join(changelog[:files][:modified].map {|f| link_to_gitweb_ebuild_diff(f, changelog[:id], @package.category, @package.name) }, ', ') %></td>
+      </tr>
+    <% end %>
+    <% unless changelog[:files][:deleted].empty? %>
+      <tr class="danger">
+        <td class="kk-changelog-diffstat-icon"><span class="octicon octicon-diff-removed"></span></td>
+        <td><%= safe_join(changelog[:files][:deleted].map {|f| link_to_gitweb_ebuild_diff(f, changelog[:id], @package.category, @package.name) }, ', ')  %></td>
+      </tr>
+    <% end %>
+
+  </table>
+</li>

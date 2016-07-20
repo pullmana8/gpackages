@@ -1,0 +1,12 @@
+<% if @changelog.empty? -%>
+  <li class="list-group-item kk-panel-content-sorry">
+    <%= t :changelog_empty %>
+    <br><br>
+    <a href="https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/<%= @package.atom %>/ChangeLog?view=markup" class="btn btn-default">
+      <span class="fa fa-fw fa-history"></span>
+      <%= t :view_cvs_changelog %>
+    </a>
+  </li>
+<% else %>
+  <%= render partial: 'changelog_entry', collection: @changelog, as: 'changelog' %>
+<% end %>

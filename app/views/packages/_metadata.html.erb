@@ -1,0 +1,87 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t :box_metadata %></h3>
+  </div>
+  <ul class="list-group kk-metadata-list">
+  <% if package.homepage.size > 1 %>
+    <li class="kk-metadata-item list-group-item">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 kk-metadata-key">
+          <span class="fa fa-fw fa-home"></span>
+          <%= t :other_homepages %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <% package.homepage[1..-1].each do |hp| %>
+            <%= link_to hp, hp, rel: 'nofollow' %>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <% if package.longdescription %>
+    <li class="kk-metadata-item list-group-item">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 kk-metadata-key">
+          <span class="fa fa-fw fa-info"></span>
+          <%= t :longdescription %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <%= package.longdescription %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <% if package.has_useflags? %>
+    <li class="kk-metadata-item list-group-item">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 kk-metadata-key">
+          <span class="fa fa-fw fa-sliders"></span>
+          <%= t :use_flags %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <%= render partial: 'metadata_use', object: package.useflags, as: 'useflags' %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <% if package.license %>
+    <li class="kk-metadata-item list-group-item">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 kk-metadata-key">
+          <span class="fa fa-fw fa-legal"></span>
+          <%= t :license %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <%= annotate_license_str package.license %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <% if package.herds and package.herds.size > 0 %>
+    <li class="kk-metadata-item list-group-item">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 kk-metadata-key">
+          <span class="fa fa-fw fa-group"></span>
+          <%= t :herds %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <%= render partial: 'herd', collection: package.herds.sort, as: 'herd', spacer_template: 'maintainer_spacer' %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <% if package.maintainers and package.maintainers.size > 0 %>
+    <li class="kk-metadata-item list-group-item">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 kk-metadata-key">
+          <span class="fa fa-fw fa-user"></span>
+          <%= t :maintainers %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <%= render partial: 'maintainer', collection: package.maintainers, as: 'maintainer', spacer_template: 'maintainer_spacer' %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+</div>

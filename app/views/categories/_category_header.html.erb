@@ -1,0 +1,21 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><%= link_to t(:packages), categories_path %></li>
+  <li class="active"><%= category.name %></li>
+</ol>
+
+<div class="row">
+  <div class="col-md-4">
+    <h1 class="stick-top">
+      <span class="fa fa-fw fa-cubes"></span>
+      <%= category.name %>
+    </h1>
+  </div>
+  <div class="col-md-8">
+    <p class="lead" style="margin: 0;">
+      <%= category.description %>
+    </p>
+  </div>
+</div>
+
+<hr>

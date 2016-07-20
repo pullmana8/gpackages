@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /packages/search
+Disallow: /packages/suggest
+Disallow: /categories/search
+Disallow: /categories/suggest
+Disallow: /useflags/suggest
+
+User-agent: AhrefsBot
+Disallow: /

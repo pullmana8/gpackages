@@ -1,0 +1,38 @@
+<h1 class="first-header">Search Results <small>for <%= params[:q] %></small></h1>
+
+<% if @packages.size > 0 %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Results <%= @offset + 1 %>—<%= [@offset + Package.default_search_size, @packages.total].min %> of <%= @packages.total %>
+  </div>
+  <div class="list-group">
+    <%= render partial: 'package_result_row', collection: @packages, as: 'package' %>
+  </div>
+  <div class="panel-footer">
+    <div class="btn-group" role="group" aria-label="Result navigation">
+      <%= link_to '< Prev', search_packages_path(q: params[:q], o: [@offset - Package.default_search_size, 0].max), class: 'btn btn-default' + (@offset > 0 ? '' : ' disabled') %>
+      <%= link_to 'Next >', search_packages_path(q: params[:q], o: @offset + Package.default_search_size), class: 'btn btn-default ' + ((@offset + Package.default_search_size) > @packages.total ? 'disabled' : '') %>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="jumbotron">
+  <h2 class="site-welcome stick-top">Nothing found. :( Try again?</h2>
+
+  <form action="<%= search_packages_path %>" method="get">
+    <div class="typeahead-container">
+      <div class="typeahead-field">
+        <span class="typeahead-query">
+          <input id="q" name="q" type="search" autocomplete="off" placeholder="<%= t :find_packages %>" aria-label="<%= t :find_packages %>" value="<%= params[:q] %>">
+        </span>
+        <span class="typeahead-button">
+          <button type="submit" title="<%= t :find %>" aria-label="<%= t :find %>">
+            <span class="typeahead-search-icon"></span><span class="sr-only"><%= t :find %></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+<%= javascript_include_tag 'index/typeahead.js' %>
+<% end %>

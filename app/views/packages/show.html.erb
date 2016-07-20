@@ -1,0 +1,28 @@
+<% cache "#{@package.atom}-#{@package.metadata_hash}" do %>
+<%= render partial: 'package_header', object: @package, as: 'package' %>
+
+<div class="row">
+  <div class="col-md-9">
+    <%= render partial: 'versions', object: @package.versions, as: 'versions' %>
+
+    <% if @package.removal_pending? %>
+    <%= render partial: 'removal_notice', object: @package, as: 'package' %>
+    <% end %>
+
+    <%= render partial: 'maintainer_needed_notice', object: @package, as: 'package' %>
+    <%= render partial: 'metadata', object: @package, as: 'package', locals: { latest_version: @package.versions.first} %>
+
+    <%= render partial: 'masks', object: @package.versions, as: 'versions' %>
+
+    <%= render partial: 'changelog', object: @changelog, as: 'changelog' %>
+  </div>
+  <div class="col-md-3">
+    <%= render partial: 'resources', object: @package, as: 'package' %>
+  </div>
+</div>
+
+<%= javascript_include_tag 'packages/show' %>
+<% content_for :head do %>
+  <%= alternate_feed_link('https://gitweb.gentoo.org/repo/gentoo.git/atom/%s?h=master' % @package.atom, t(:raw_git_feed)) %>
+<% end %>
+<% end %>

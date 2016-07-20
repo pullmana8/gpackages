@@ -1,0 +1,30 @@
+<li class="list-group-item kk-mask">
+  <strong class="kk-mask-reason text-danger"><%= annotate_bugs(mask['reason']) %></strong>
+
+  <div class="kk-mask-details">
+    <!--<div class="row">
+      <div class="col-xs-12 col-md-3 kk-metadata-key">
+        Affected architectures
+      </div>
+      <div class="col-xs-12 col-md-9 kk-mask-atoms">
+        <%# mask['arch'] %>
+      </div>
+    </div>-->
+    <div class="row">
+      <div class="col-xs-12 col-md-3 kk-metadata-key">
+        <%= t :mask_packages %>
+      </div>
+      <div class="col-xs-12 col-md-9 kk-mask-atoms">
+        <%= mask['atoms'].join ', ' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-3 kk-metadata-key">
+        <%= t :mask_author %>
+      </div>
+      <div class="col-xs-12 col-md-9">
+        <%= mask['author'] %> <span class="text-muted">(<%= mask['date'] %>)</span>
+      </div>
+    </div>
+  </div>
+</li>

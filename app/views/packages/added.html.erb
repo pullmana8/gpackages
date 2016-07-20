@@ -1,0 +1,23 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><%= link_to t(:packages), categories_path %></li>
+  <li class="active"><%= t :added_packages %></li>
+</ol>
+
+<h1>
+  <%= t :added_packages %>
+  <%= feed_icon added_packages_path(format: :atom) %>
+</h1>
+
+<% cache("added-full-#{@changes.hash}") do %>
+  <ul class="list-group">
+    <% @changes.each do |change|
+         _package = Package.find_by(:atom, cp_to_atom(change.category, change.package)) %>
+      <%= render partial: 'changed_package', object: change, as: 'change', locals: { package: _package, version: _package.latest_version } %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :head do %>
+  <%= alternate_feed_link(added_packages_url(format: :atom), t(:atom_feed)) %>
+<% end %>

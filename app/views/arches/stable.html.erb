@@ -1,0 +1,23 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><%= link_to t(:architectures), arches_path %></li>
+  <li class="active"><%= t :stable_packages %></li>
+</ol>
+
+<h1>
+  <%= t :stable_packages %> (<%= @arch %>)
+  <%= feed_icon stable_arch_path(id: @arch, format: :atom) %>
+</h1>
+
+<% cache("stable-full-#{@arch}-#{@changes.hash}") do %>
+  <ul class="list-group">
+    <% @changes.each do |change|
+         _package = Package.find_by(:atom, cp_to_atom(change.category, change.package)) %>
+      <%= render partial: 'packages/changed_package', object: change, as: 'change', locals: { package: _package, version: _package.version(change.version) } %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :head do %>
+  <%= alternate_feed_link(stable_arch_url(id: @arch, format: :atom), t(:atom_feed)) %>
+<% end %>

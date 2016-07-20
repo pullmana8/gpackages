@@ -1,0 +1,16 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+# Development
+.idea
+
+# Deployment
+/vendor/bundle
+/config/secrets.yml
+/config/initializers/kkuleomi_config.rb
+/public/assets

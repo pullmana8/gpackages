@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t :box_versions %>
+      <span class="pull-right">
+        <a href="<%= about_help_path(anchor: 'keyword-legend') %>" aria-label="<%= t :show_table_legend %>" title="<%= t :legend %>" class="kk-box-meta-link" tabindex="0" role="button" id="kk-keyword-legend-btn">
+          <span class="fa fa-fw fa-question-circle"></span>
+        </a>
+      </span>
+    </h3>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered kk-versions-table">
+      <thead>
+      <tr>
+        <th class="kk-version kk-cell-sep-right"><%= t :version %></th>
+        <th class="kk-keyword-header kk-keyword">amd64</th>
+        <th class="kk-keyword-header kk-keyword kk-cell-sep-right">x86</th>
+        <th class="kk-keyword-header kk-keyword">alpha</th>
+        <th class="kk-keyword-header kk-keyword">arm</th>
+        <th class="kk-keyword-header kk-keyword">hppa</th>
+        <th class="kk-keyword-header kk-keyword">ia64</th>
+        <th class="kk-keyword-header kk-keyword">ppc</th>
+        <th class="kk-keyword-header kk-keyword">ppc64</th>
+        <th class="kk-keyword-header kk-keyword">sparc</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <%= render partial: 'version_row', collection: versions, as: 'version' %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script id="kk-keyword-legend-text" type="text/template">
+<%= render partial: 'keyword_legend' %>
+</script>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= "#{@title} – " if @title %>Gentoo Packages</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#54487a">
+  <meta name="description" content="<%= "#{@description} in the " if @description %>Gentoo Packages Database">
+  <link href="https://assets.gentoo.org/tyrian/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="https://assets.gentoo.org/tyrian/tyrian.min.css" rel="stylesheet" media="screen">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://assets.gentoo.org/tyrian/bootstrap.min.js"></script>
+  <link rel="icon" href="https://www.gentoo.org/favicon.ico" type="image/x-icon">
+  <% if content_for? :head -%>
+    <%= yield :head %>
+  <% end -%>
+</head>
+<body class="kk">
+<header>
+  <div class="site-title">
+    <div class="container">
+      <div class="row">
+        <div class="site-title-buttons">
+          <div class="btn-group btn-group-sm">
+            <a href="https://get.gentoo.org/" role="button" class="btn get-gentoo"><span class="fa fa-fw fa-download"></span> <strong>Get Gentoo!</strong></a>
+            <div class="btn-group btn-group-sm">
+              <a class="btn gentoo-org-sites dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">
+                <span class="fa fa-fw fa-map-o"></span> <span class="hidden-xs">gentoo.org sites</span> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="https://www.gentoo.org/" title="Main Gentoo website"><span class="fa fa-home fa-fw"></span> gentoo.org</a></li>
+                <li><a href="https://wiki.gentoo.org/" title="Find and contribute documentation"><span class="fa fa-file-text-o fa-fw"></span> Wiki</a></li>
+                <li><a href="https://bugs.gentoo.org/" title="Report issues and find common issues"><span class="fa fa-bug fa-fw"></span> Bugs</a></li>
+                <li><a href="https://forums.gentoo.org/" title="Discuss with the community"><span class="fa fa-comments-o fa-fw"></span> Forums</a></li>
+                <li><a href="https://packages.gentoo.org/" title="Find software for your Gentoo"><span class="fa fa-hdd-o fa-fw"></span> Packages</a></li>
+                <li class="divider"></li>
+                <li><a href="https://planet.gentoo.org/" title="Find out what's going on in the developer community"><span class="fa fa-rss fa-fw"></span> Planet</a></li>
+                <li><a href="https://archives.gentoo.org/" title="Read up on past discussions"><span class="fa fa-archive fa-fw"></span> Archives</a></li>
+                <li><a href="https://sources.gentoo.org/" title="Browse our source code"><span class="fa fa-code fa-fw"></span> Sources</a></li>
+                <li class="divider"></li>
+                <li><a href="https://infra-status.gentoo.org/" title="Get updates on the services provided by Gentoo"><span class="fa fa-server fa-fw"></span> Infra Status</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="logo">
+          <a href="/" title="Back to the homepage" class="site-logo">
+            <object data="https://assets.gentoo.org/tyrian/site-logo.svg" type="image/svg+xml">
+              <img src="https://assets.gentoo.org/tyrian/site-logo.png" alt="Gentoo Linux Logo">
+            </object>
+          </a>
+          <span class="site-label">Packages</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="tyrian-navbar" role="navigation">
+    <div class="container">
+      <div class="row">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-main-collapse">
+          <ul class="nav navbar-nav">
+            <li class="<%= 'active' if @nav == :index %>"><%= link_to t(:home), '/' %></li>
+            <li class="<%= 'active' if @nav == :packages %>"><%= link_to t(:packages), categories_path %></li>
+            <li class="<%= 'active' if @nav == :use %>"><%= link_to t(:use_flags), useflags_path %></li>
+            <li class="<%= 'active' if @nav == :arches %>"><%= link_to t(:architectures), arches_path %></li>
+            <li class="<%= 'active' if @nav == :about %>"><%= link_to t(:about), about_path %></li>
+          </ul>
+          <% unless @nav == :index %>
+          <form class="navbar-form navbar-right" role="search" action="<%= search_packages_path %>" method="get">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Find Packages" name="q">
+            </div>
+          </form>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-offset-2 col-md-7">
+        <h3 class="footerhead"><%= t :app_name %></h3>
+        <div class="row">
+          <div class="col-xs-12 col-md-4">
+            <span class="kk-group-header"><%= t :data_current_as_of %></span><br><%= last_import_start ? i18n_date(last_import_start) : 'unknown' %>
+          </div>
+          <div class="col-xs-12 col-md-4">
+          </div>
+          <div class="col-xs-12 col-md-4">
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-3">
+        <h3 class="footerhead">Questions or comments?</h3>
+        Please feel free to <a href="https://www.gentoo.org/inside-gentoo/contact/">contact us</a>.
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-sm-3 col-md-2">
+        <ul class="footerlinks three-icons">
+          <li><a href="https://twitter.com/gentoo" title="@Gentoo on Twitter"><span class="fa fa-twitter fa-fw"></span></a></li>
+          <li><a href="https://plus.google.com/+Gentoo" title="+Gentoo on Google+"><span class="fa fa-google-plus fa-fw"></span></a></li>
+          <li><a href="https://www.facebook.com/gentoo.org" title="Gentoo on Facebook"><span class="fa fa-facebook fa-fw"></span></a></li>
+        </ul>
+      </div>
+      <div class="col-xs-10 col-sm-9 col-md-10">
+        <strong>&copy; 2001&ndash;2016 Gentoo Foundation, Inc.</strong><br>
+        <small>
+          Gentoo is a trademark of the Gentoo Foundation, Inc.
+          The contents of this document, unless otherwise expressly stated, are licensed under the
+          <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">CC-BY-SA-3.0</a> license.
+          The <a href="https://www.gentoo.org/inside-gentoo/foundation/name-logo-guidelines.html">Gentoo Name and Logo Usage Guidelines</a> apply.
+        </small>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.gentoo.org/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 8]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.gentoo.org/piwik.php?idsite=8" style="border:0;" alt="" /></p></noscript>
+</body>
+</html>

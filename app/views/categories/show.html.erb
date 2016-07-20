@@ -1,0 +1,28 @@
+<%= render partial: 'category_header', object: @category, as: 'category' %>
+
+<div class="row">
+  <div class="col-md-9">
+    <!--<p>
+      <input type="text" class="form-control form-control-xl" placeholder="Search packages in <%= @category.name %>">
+    </p>-->
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">All packages</h3>
+      </div>
+      <table class="table">
+        <%= render partial: 'package_line', collection: @packages, as: 'package' %>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Statistics</h3>
+      </div>
+      <div class="panel-body">
+        <%= @packages.count %> <%= t :packages %>
+      </div>
+    </div>
+  </div>
+</div>

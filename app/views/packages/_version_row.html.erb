@@ -1,0 +1,12 @@
+<tr>
+  <td class="kk-version kk-cell-sep-right"><strong><%= version.version %></strong><%= version_slot version.slot, version.subslot %> <%= version_labels version %></td>
+  <%= keyword_cell version, 'amd64' %>
+  <%= keyword_cell version, 'x86', true %>
+  <%= keyword_cell version, 'alpha' %>
+  <%= keyword_cell version, 'arm' %>
+  <%= keyword_cell version, 'hppa' %>
+  <%= keyword_cell version, 'ia64' %>
+  <%= keyword_cell version, 'ppc' %>
+  <%= keyword_cell version, 'ppc64' %>
+  <%= keyword_cell version, 'sparc' %>
+</tr>

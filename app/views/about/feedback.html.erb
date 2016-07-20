@@ -1,0 +1,64 @@
+<ol class="breadcrumb">
+  <li><a href="/"><%= t :home %></a></li>
+  <li><a href="/about"><%= t :about %></a></li>
+  <li class="active"><%= t :feedback %></li>
+</ol>
+
+<h1>Feedback</h1>
+
+<p class="lead">
+  Thanks for checking out the new packages.gentoo.org!
+</p>
+<p>
+  This site is currently in an <abbr title="minimum viable product">MVP</abbr> state and will be extended further to provide more useful features.
+  To help us prioritize new features and learn about your use case for the site, please share your ideas below.
+  <br><br>
+</p>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Send Feedback</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" method="post" action="/about/feedback">
+          <div class="form-group">
+            <label for="feedback" class="col-sm-2 control-label">Your Feedback:</label>
+            <div class="col-sm-10">
+              <textarea name="feedback" id="feedback" class="form-control" rows="10" placeholder="Please be sure to explain issues in detail and with exact URL references."></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact" class="col-sm-2 control-label">Contact (optional):</label>
+            <div class="col-sm-10">
+              <input type="text" name="contact" class="form-control" id="contact" placeholder="How can we reach you to follow up on your feedback?">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Other ways to get in touch</h3>
+      </div>
+      <div class="list-group">
+        <a href="mailto:gpackages@gentoo.org" class="list-group-item">
+          <span class="fa fa-fw fa-envelope"></span>
+          E-Mail: gpackages@gentoo.org
+        </a>
+        <a href="irc://irc.gentoo.org/gentoo-www" class="list-group-item">
+          <span class="fa fa-fw fa-comments-o"></span>
+          IRC: #gentoo-www
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

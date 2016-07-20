@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t(:resources) %></h3>
+  </div>
+  <div class="list-group">
+    <a href="https://bugs.gentoo.org/buglist.cgi?quicksearch=<%= u package.atom %>" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-bug"></span>
+      <%= t :res_bugs %>
+    </a>
+    <a href="https://wiki.gentoo.org/index.php?title=Special%3ASearch&fulltext=Search&search=<%= u package.name %>" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-book"></span>
+      <%= t :res_docs %>
+    </a>
+    <a href="https://forums.gentoo.org/search.php?search_terms=all&show_results=topics&search_keywords=<%= u package.name %>&mode=results" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-comments-o"></span>
+      <%= t :res_forums %>
+    </a>
+    <a href="https://gitweb.gentoo.org/repo/gentoo.git/tree/<%= package.atom %>" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-code-fork"></span>
+      <%= t :res_repo %>
+    </a>
+    <a href="https://gitweb.gentoo.org/repo/gentoo.git/log/<%= package.atom %>?showmsg=1" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-history"></span>
+      <%= t :res_log %>
+    </a>
+    <a href="https://gitweb.gentoo.org/repo/gentoo.git/atom/<%= package.atom %>?h=master" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-rss"></span>
+      <%= t :res_feed %>
+    </a>
+    <a href="http://www.portagefilelist.de/site/query/listPackageVersions/?category=<%= package.category %>&package=<%= package.name %>&do#result" class="list-group-item" target="_blank">
+      <span class="fa fa-fw fa-files-o"></span>
+      <%= t :res_installed_files %> <small>(via PFL<span class="fa fa-fw fa-external-link-square"></span>)</small>
+    </a>
+  </div>
+</div>

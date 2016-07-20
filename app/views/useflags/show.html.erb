@@ -1,0 +1,61 @@
+<%= render partial: 'useflag_header' %>
+
+<div class="row">
+  <div class="col-md-4">
+    <h1 class="stick-top">
+      <span class="fa fa-fw fa-sliders"></span>
+      <%= params[:id] %>
+    </h1>
+  </div>
+  <div class="col-md-8">
+    <% unless @useflags[:global].empty? %>
+      <div class="kk-useflag-group"><%= t :global_use_flag %></div>
+      <p class="lead" style="margin: 0;">
+          <%= @useflags[:global].first.description %>
+      </p>
+    <% else %>
+      <div class="kk-useflag-group"><%= t :local_use_flag %></div>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<% unless @useflags[:local].empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t :local_use_package_list, flag: params[:id] %></h3>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th><%= t :package %></th>
+          <th><%= t :flag_description, flag: params[:id] %></th>
+        </thead>
+        <tbody>
+          <% @useflags[:local].keys.sort.each do |package| %>
+          <tr>
+            <th class="kk-nobreak-cell"><%= link_to package, slf(package_path(package)) %></th>
+            <td><%= annotate_useflag_description @useflags[:local][package].description %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<% unless @useflags[:global].empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t :providing_packages_list, flag: params[:id], count: @packages.count %></h3>
+    </div>
+    <div class="panel-body">
+      <ul class="kk-col-list kk-3col-list kk-useflag-listing">
+      <% @packages.each do |package| %>
+        <li><%= link_to_package package['key'] %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

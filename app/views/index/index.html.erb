@@ -1,0 +1,53 @@
+<div class="jumbotron">
+  <h2 class="site-welcome stick-top">Welcome to the Home of <span class="text-primary"><%= number_with_delimiter Package.count %></span> Gentoo Packages</h2>
+
+  <form action="<%= search_packages_path %>" method="get">
+    <div class="typeahead-container">
+      <div class="typeahead-field">
+        <span class="typeahead-query">
+          <input id="q" name="q" type="search" autocomplete="off" placeholder="<%= t :find_packages %>" aria-label="<%= t :find_packages %>" autofocus>
+        </span>
+        <span class="typeahead-button">
+          <button type="submit" title="<%= t :find %>" aria-label="<%= t :find %>">
+            <span class="typeahead-search-icon"></span><span class="sr-only"><%= t :find %></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+
+<% cache("added-#{@new_packages.hash}") do %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="fa fa-fw fa-history"></span>
+      <%= link_to t(:added_packages), added_packages_path %>
+    </h3>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <%= render partial: 'package', collection: @new_packages, as: 'change' %>
+    </table>
+  </div>
+</div>
+<% end %>
+
+<% cache("updated-#{@version_bumps.hash}") do %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="fa fa-fw fa-asterisk"></span>
+      <%= link_to t(:updated_packages), updated_packages_path %>
+    </h3>
+  </div>
+  <ul class="list-group">
+    <% @version_bumps.each do |change|
+         _package = Package.find_by(:atom, cp_to_atom(change.category, change.package)) %>
+      <%= render partial: 'packages/changed_package', object: change, as: 'change', locals: { package: _package, version: _package.version(change.version) } %>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= javascript_include_tag 'index/typeahead.js' %>

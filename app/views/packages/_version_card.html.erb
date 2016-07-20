@@ -1,0 +1,14 @@
+<div class="kk-version-card">
+  <p><strong><%= version.version %></strong><%= version_slot version.slot %> <%= version_labels version %></p>
+  <p>
+  <%= keyword_label version, 'amd64' %>
+  <%= keyword_label version, 'x86' %>
+  <%= keyword_label version, 'alpha' %>
+  <%= keyword_label version, 'arm' %>
+  <%= keyword_label version, 'hppa' %>
+  <%= keyword_label version, 'ia64' %>
+  <%= keyword_label version, 'ppc' %>
+  <%= keyword_label version, 'ppc64' %>
+  <%= keyword_label version, 'sparc' %>
+  </p>
+</div>

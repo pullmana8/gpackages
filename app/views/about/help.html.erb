@@ -1,0 +1,11 @@
+<ol class="breadcrumb">
+  <li><a href="/"><%= t :home %></a></li>
+  <li><a href="/about"><%= t :about %></a></li>
+  <li class="active"><%= t :help %></li>
+</ol>
+
+<h1><%= t :help %></h1>
+
+<h2 id="keyword-legend"><%= t :keyword_table_legend %></h2>
+
+<%= render partial: 'packages/keyword_legend' %>

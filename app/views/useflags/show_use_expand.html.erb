@@ -1,0 +1,57 @@
+<%= render partial: 'useflag_header' %>
+
+<div class="row">
+  <div class="col-md-4">
+    <h1 class="stick-top">
+      <span class="fa fa-fw fa-sliders"></span>
+      <%= @useflag.strip_use_expand %>
+    </h1>
+  </div>
+  <div class="col-md-8">
+    <div class="kk-useflag-group"><%= t :named_use_expand_flag, name: @use_expand_flag_name %></div>
+    <p class="lead" style="margin: 0;">
+      <%= @useflags[:use_expand].first.description %>
+    </p>
+  </div>
+</div>
+
+<hr>
+
+<% unless @use_expand_flags.empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t :other_use_expand_list, flag: @use_expand_flag_name %></h3>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th><%= t :use_flag %></th>
+          <th><%= t :description %></th>
+        </thead>
+        <tbody>
+          <% @use_expand_flags.each do |flag| %>
+          <tr>
+            <th class="kk-nobreak-cell"><%= link_to flag.name, slf(useflag_path(flag.name)) %></th>
+            <td><%= flag.description %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<% unless @packages.empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t :providing_packages_list, flag: params[:id], count: @packages.count %></h3>
+    </div>
+    <div class="panel-body">
+      <ul class="kk-3col-list kk-useflag-listing">
+      <% @packages.each do |package| %>
+        <li><%= link_to_package package['key'] %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

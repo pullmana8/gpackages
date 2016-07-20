@@ -1,0 +1,36 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li class="active"><%= t :architectures %></li>
+</ol>
+
+<h1><%= t :architectures %></h1>
+
+<p><%= t :arches_intro %></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t :architectures %></h3>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <col>
+      <col style="width: 20em;">
+      <col style="width: 20em;">
+      <tbody>
+      <% ::KKULEOMI_ARCHES.sort.each do |arch| %>
+        <tr>
+          <th class="kk-nobreak-cell"><%= arch %></th>
+          <td>
+            <%= link_to t(:keyworded_packages), keyworded_arch_path(id: arch) %>
+            <%= feed_icon keyworded_arch_path(id: arch, format: :atom) %>
+          </td>
+          <td>
+            <%= link_to t(:stable_packages), stable_arch_path(id: arch) %>
+            <%= feed_icon stable_arch_path(id: arch, format: :atom) %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
