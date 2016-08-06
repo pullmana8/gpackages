@@ -22,7 +22,7 @@
 
     <p class="kk-package-homepage">
       <% if '' != package.homepage.first %>
-      <span class="fa fa-fw fa-home"></span> <%= link_to package.homepage.first, package.homepage.first, rel: 'nofollow' %>
+      <span class="fa fa-fw fa-home"></span> <%= content_tag :a, package.homepage.first, href: package.homepage.first, rel: 'nofollow' %>
       <% end %>
     </p>
   </div>
