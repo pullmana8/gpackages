@@ -1,6 +1,5 @@
-<% cache "#{@package.atom}-#{@package.metadata_hash}" do %>
 <%= render partial: 'package_header', object: @package, as: 'package' %>
-
+<% cache "#{@package.atom}-#{@package.metadata_hash}" do %>
 <div class="row">
   <div class="col-md-9">
     <%= render partial: 'versions', object: @package.versions, as: 'versions' %>
