@@ -1,31 +1,39 @@
-<ol class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><%= link_to t(:packages), categories_path %></li>
-  <li><%= link_to package.category_model.name, category_path(package.category_model) %></li>
-  <li class="active"><%= package.name %></li>
-</ol>
+<% content_for :header do %>
+<div class="kk-header-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><%= link_to t(:packages), categories_path %></li>
+          <li><%= link_to package.category_model.name, category_path(package.category_model) %></li>
+          <li class="active"><%= package.name %></li>
+        </ol>
 
-<div class="row">
-  <div class="col-md-4">
-    <h1 class="stick-top kk-package-title" id="package-title" data-atom="<%= package.atom %>" data-category="<%= package.category %>" data-name="<%= package.name %>">
-      <small class="kk-package-cat"><%= package.category_model.name %>/</small>
-      <div>
-        <span class="mega-octicon octicon-package kk-package-icon"></span>
-        <div class="kk-package-name"><%= package.name %></div>
+        <div class="row">
+          <div class="col-md-4">
+            <h1 class="stick-top kk-package-title" id="package-title" data-atom="<%= package.atom %>" data-category="<%= package.category %>" data-name="<%= package.name %>">
+              <small class="kk-package-cat"><%= package.category_model.name %>/</small>
+              <div>
+                <span class="mega-octicon octicon-package kk-package-icon"></span>
+                <div class="kk-package-name"><%= package.name %></div>
+              </div>
+            </h1>
+          </div>
+          <div class="col-md-8">
+            <p class="lead kk-package-maindesc">
+              <%= package.description %>
+            </p>
+
+            <% unless package.homepage.empty? || package.homepage.first.nil? || package.homepage.first.empty? %>
+            <p class="kk-package-homepage">
+              <span class="fa fa-fw fa-home"></span> <%= content_tag :a, package.homepage.first, href: package.homepage.first, rel: 'nofollow' %>
+            </p>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </h1>
-  </div>
-  <div class="col-md-8">
-    <p class="lead kk-package-maindesc">
-      <%= package.description %>
-    </p>
-
-    <p class="kk-package-homepage">
-      <% unless package.homepage.empty? || package.homepage.first.nil? || package.homepage.first.empty? %>
-      <span class="fa fa-fw fa-home"></span> <%= content_tag :a, package.homepage.first, href: package.homepage.first, rel: 'nofollow' %>
-      <% end %>
-    </p>
+    </div>
   </div>
 </div>
-
-<hr>
+<% end %>

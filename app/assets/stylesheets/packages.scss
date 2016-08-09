@@ -36,25 +36,31 @@
   font-weight: bold;
 }
 
-.kk-package-title .kk-package-icon {
-  float: left;
-}
+.kk-package-title {
+  margin-bottom: 0;
 
-.kk-package-title .kk-package-name {
-  margin-left: 1.3em;
-  word-wrap: break-word;
-}
+  .kk-package-icon {
+    float: left;
+  }
 
-.kk-package-title .kk-package-cat {
-  padding-left: 2.05em;
+  .kk-package-name {
+    margin-left: 1.3em;
+    word-wrap: break-word;
+  }
+
+  .kk-package-cat {
+    padding-left: 2.05em;
+  }
 }
 
 .kk-package-maindesc {
   margin-top: 1.75em;
+  margin-bottom: 0;
 }
 
 .kk-package-homepage {
   margin: 0;
+  margin-top: 1em;
   font-size: 125%;
 }
 
