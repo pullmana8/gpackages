@@ -1,5 +1,10 @@
 ## 10 Aug 2016
 * Package versions now link to the ebuild in git
+* First set of icons now uses SVGs
+* Keyword table legend now always points to the help page. The popup was not mobile compatible.
+
+## 9 Aug 2016
+* Fixed handling of empty HOMEPAGE variables and homepages pointing to this site
 
 ## 10 Oct 2015
 
