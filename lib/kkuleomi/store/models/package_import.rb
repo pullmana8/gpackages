@@ -47,6 +47,8 @@ module Kkuleomi::Store::Models::PackageImport
           package: name
         )
       end
+
+      Rails.cache.delete("changelog/#{package_model.to_cp}")
     end
 
     def set_basic_metadata(package_model, latest_ebuild)

@@ -35,7 +35,7 @@ class PackagesController < ApplicationController
     @package = Package.find_by(:atom, params[:id])
     fail ActionController::RoutingError, 'No such package' unless @package
 
-    @changelog = Rails.cache.fetch("changelog/#{@package.atom}", expires_in: 10.minutes) do
+    @changelog = Rails.cache.fetch("changelog/#{@package.atom}") do
       Portage::Util::History.for(@package.category, @package.name, 5)
     end
 

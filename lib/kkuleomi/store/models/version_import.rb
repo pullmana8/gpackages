@@ -50,6 +50,7 @@ module Kkuleomi::Store::Models::VersionImport
         ) if options[:package_state] != 'new' && options[:version_state] == 'new'
 
         process_keyword_diff(old_keywords, keywords, parent_package) unless old_keywords == keywords
+        Rails.cache.delete("changelog/#{parent_package.atom}")
       end
     end
 
