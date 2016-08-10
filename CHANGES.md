@@ -1,3 +1,6 @@
+## 10 Aug 2016
+* Package versions now link to the ebuild in git
+
 ## 10 Oct 2015
 
 * Categories list: Condense output, display descriptions as tooltip instead of in a table

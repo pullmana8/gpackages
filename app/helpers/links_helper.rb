@@ -24,6 +24,11 @@ module LinksHelper
     link_to license, 'https://gitweb.gentoo.org/repo/gentoo.git/plain/licenses/%s' % license
   end
 
+  def link_version_to_ebuild(version)
+    ebuild_path = '%s/%s.ebuild' % [version.package, version.atom.split('/').last]
+    link_to version.version, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/%s' % ebuild_path, class: 'kk-ebuild-link'
+  end
+
   def link_to_category(category)
     link_to category.name,
             category_path(category),

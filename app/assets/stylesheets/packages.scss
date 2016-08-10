@@ -236,3 +236,10 @@
     color: #999;
   }
 }
+
+a.kk-ebuild-link {
+  &:link,
+  &:visited {
+    color: #333;
+  }
+}
