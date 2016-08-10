@@ -111,6 +111,11 @@ GEM
     multipart-post (2.0.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    octicons (2.1.0)
+      nokogiri (>= 1.6.3.1)
+    octicons_helper (2.1.0)
+      octicons (~> 2.0)
+      rails
     parallel (1.6.1)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -209,6 +214,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri
+  octicons_helper
   parallel
   rails (= 4.2.5.1)
   rdiscount

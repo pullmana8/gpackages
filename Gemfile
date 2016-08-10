@@ -23,7 +23,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # packages stuff
-
 gem 'elasticsearch-rails'
 gem 'elasticsearch-persistence'
 
@@ -37,6 +36,9 @@ gem 'sinatra', require: false
 gem 'sidekiq', require: false
 
 gem 'rdiscount'
+
+# UI
+gem 'octicons_helper'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

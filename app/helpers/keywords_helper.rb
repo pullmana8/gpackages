@@ -5,9 +5,7 @@ module KeywordsHelper
     css_class = KK_KEYWORD_ICON[keyword]
 
     if css_class
-      content_tag :span,
-                  '',
-                  class: ['octicon', css_class]
+      octicon css_class, height: 16
     else
       ''
     end

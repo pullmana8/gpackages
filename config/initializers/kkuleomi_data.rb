@@ -1,8 +1,8 @@
 KK_KEYWORD_ICON = {
-  stable:      'octicon-diff-added',
-  testing:     'octicon-diff-modified',
-  unavailable: 'octicon-diff-removed',
-  masked:      'octicon-diff-ignored'
+  stable:      'diff-added',
+  testing:     'diff-modified',
+  unavailable: 'diff-removed',
+  masked:      'diff-ignored'
 }
 
 KK_KEYWORD_CLASS = {
