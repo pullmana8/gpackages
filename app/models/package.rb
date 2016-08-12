@@ -16,7 +16,16 @@ class Package
   attribute :license,         String, mapping: { index: 'not_analyzed' }
   attribute :licenses,        String, default: [], mapping: { index: 'not_analyzed' }
   attribute :herds,           String, default: [], mapping: { index: 'not_analyzed' }
-  attribute :maintainers,     Array,  default: [], mapping: { type: 'object' }
+  attribute :maintainers,     Array,  default: [], mapping: {
+    type: 'object',
+    properties: {
+      email: { type: 'string', index: 'not_analyzed' },
+      name: { type: 'string', index: 'not_analyzed' },
+      type: { type: 'string', index: 'not_analyzed' },
+      description: { type: 'string', index: 'not_analyzed' },
+      restrict: { type: 'string', index: 'not_analyzed' }
+    }
+  }
   attribute :useflags,        Hash,   default: {}, mapping: { type: 'object' }
   attribute :metadata_hash,   String, mapping: { index: 'not_analyzed' }
 
