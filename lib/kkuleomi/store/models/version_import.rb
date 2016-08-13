@@ -36,6 +36,7 @@ module Kkuleomi::Store::Models::VersionImport
       self.restrict = ebuild_model.metadata[:restrict] || []
       self.properties = ebuild_model.metadata[:properties] || []
       self.masks = Portage::Util::Masks.for(ebuild_model)
+      self.eapi = ebuild_model.metadata[:eapi] || ''
       self.metadata_hash = ebuild_model.metadata_hash
 
       save
