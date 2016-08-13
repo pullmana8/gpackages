@@ -47,7 +47,6 @@ en:
   other_homepages: "Other homepage(s)"
   longdescription: "Full description"
   license: "License"
-  herds: "Herd(s)"
   use_flags: "USE flags"
   maintainers: "Maintainer(s)"
   restrict_tooltip: "The following features are restricted: %{list}"

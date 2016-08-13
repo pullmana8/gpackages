@@ -41,10 +41,6 @@ module LinksHelper
     link_to atom, slf(package_path(atom))
   end
 
-  def link_to_herd(herd)
-    link_to herd, 'https://www.gentoo.org/inside-gentoo/developers/herds.html#%s' % herd
-  end
-
   def link_to_bug(str, bugid)
     link_to str, 'https://bugs.gentoo.org/show_bug.cgi?id=%s' % bugid
   end

@@ -7,7 +7,6 @@ json.versions @package.versions do |version|
   json.masks version.masks
 end
 
-json.herds @package.herds
 json.maintainers @package.maintainers do |maintainer|
   json.email maintainer['email']
   json.name maintainer['name']

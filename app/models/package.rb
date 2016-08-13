@@ -15,7 +15,6 @@ class Package
   attribute :homepage,        String, default: [], mapping: { index: 'not_analyzed' }
   attribute :license,         String, mapping: { index: 'not_analyzed' }
   attribute :licenses,        String, default: [], mapping: { index: 'not_analyzed' }
-  attribute :herds,           String, default: [], mapping: { index: 'not_analyzed' }
   attribute :maintainers,     Array,  default: [], mapping: {
     type: 'object',
     properties: {
@@ -67,7 +66,7 @@ class Package
   # @return [Boolean] true, if it is assigned to maintainer-needed or has no maintainers
   def needs_maintainer?
     (maintainers.size == 1 && maintainers.first['email'] == 'maintainer-needed@gentoo.org') ||
-      maintainers.empty? && herds.empty?
+      maintainers.empty?
   end
 
   private

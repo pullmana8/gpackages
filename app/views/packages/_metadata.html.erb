@@ -57,19 +57,6 @@
       </div>
     </li>
   <% end %>
-  <% if package.herds and package.herds.size > 0 %>
-    <li class="kk-metadata-item list-group-item">
-      <div class="row">
-        <div class="col-xs-12 col-md-3 kk-metadata-key">
-          <span class="fa fa-fw fa-group"></span>
-          <%= t :herds %>
-        </div>
-        <div class="col-xs-12 col-md-9">
-          <%= render partial: 'herd', collection: package.herds.sort, as: 'herd', spacer_template: 'maintainer_spacer' %>
-        </div>
-      </div>
-    </li>
-  <% end %>
   <% if package.maintainers and package.maintainers.size > 0 %>
     <li class="kk-metadata-item list-group-item">
       <div class="row">

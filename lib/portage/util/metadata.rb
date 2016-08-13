@@ -19,9 +19,6 @@ class Portage::Util::Metadata
   private
 
   def parse!(xml)
-    # <herd>
-    @metadata[:herds] = xml.xpath('/pkgmetadata/herd').map(&:text)
-
     # <maintainer>
     @metadata[:maintainer] = []
     xml.xpath('/pkgmetadata/maintainer').each do |maintainer_tag|

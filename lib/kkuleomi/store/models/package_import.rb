@@ -66,7 +66,6 @@ module Kkuleomi::Store::Models::PackageImport
       self.license = latest_ebuild.metadata[:license]
       self.licenses = split_license_str latest_ebuild.metadata[:license]
 
-      self.herds = package_model.metadata[:herds]
       self.maintainers = package_model.metadata[:maintainer]
 
       self.longdescription = package_model.metadata[:longdescription][:en]
