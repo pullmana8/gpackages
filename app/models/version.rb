@@ -18,6 +18,9 @@ class Version
   attribute :restrict,      String,  default: [], mapping: { index: 'not_analyzed' }
   attribute :properties,    String,  default: [], mapping: { index: 'not_analyzed' }
   attribute :metadata_hash, String,  mapping: { index: 'not_analyzed' }
+  attribute :rdeps,         String,  mapping: { index: 'not_analyzed' }
+  attribute :deps,          String,  mapping: { index: 'not_analyzed' }
+  attribute :tags,          Array,   default: [], mapping: { type: 'string', index: 'not_anaylzed' }
 
   # Returns the keywording state on a given architecture
   #
