@@ -38,7 +38,7 @@ module Kkuleomi::Store::Models::VersionImport
       self.masks = Portage::Util::Masks.for(ebuild_model)
       self.metadata_hash = ebuild_model.metadata_hash
 
-      save(parent: parent_package.id)
+      save
 
       # If keywords changed, calculate changes and record as needed (but only do that if we should)
       unless options[:suppress_change_objects]
@@ -57,10 +57,9 @@ module Kkuleomi::Store::Models::VersionImport
     # Convenience method to set the sort key and save the model
     #
     # @param [Integer] sort_key Sort key to set
-    # @param [Package] parent Parent package model
-    def set_sort_key!(key, parent)
+    def set_sort_key!(key)
       self.sort_key = key
-      save(parent: parent.id)
+      save
     end
 
     def strip_useflag_defaults(flags)

@@ -32,23 +32,6 @@ module Kkuleomi::Store::Model
       find_all_by(field, value, opts).first
     end
 
-    def find_all_by_parent(parent, opts = {})
-      search(opts.merge(
-        size: 10_000,
-        query: {
-          filtered: {
-            filter: {
-              has_parent: {
-                type: parent.class.document_type,
-                filter: { term: { _id: parent.id } }
-              }
-            },
-            query: { match_all: {} }
-          }
-        }
-      ))
-    end
-
     # Returns all (by default 10k) records of this class sorted by a field.
     def all_sorted_by(field, order, options = {})
       all({

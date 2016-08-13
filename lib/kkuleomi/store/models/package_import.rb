@@ -102,7 +102,7 @@ module Kkuleomi::Store::Models::PackageImport
     end
 
     def import_versions!(package_model, ebuilds, options)
-      index_v = Hash[Version.find_all_by_parent(self).map { |v| [v.version, v] }]
+      index_v = Hash[versions.map { |v| [v.version, v] }]
       model_v = Hash[ebuilds.map { |v| [v.version, v] }]
 
       index_keys = index_v.keys
@@ -123,7 +123,7 @@ module Kkuleomi::Store::Models::PackageImport
         version_doc.import!(model_v[v], self, options.merge(version_state: 'new'))
 
         sort_key = ebuild_order[v]
-        version_doc.set_sort_key!(sort_key, self)
+        version_doc.set_sort_key!(sort_key)
 
         if sort_key == 0
           self.useflags = version_doc.useflags
