@@ -1,8 +1,10 @@
+<%- package = Package.find_by(:atom, cp_to_atom(change.category, change.package)); unless package.nil? -%>
 <tr>
   <td>
     <a href="<%= slf(package_path(cp_to_atom(change.category, change.package))) %>">
       <span class="text-muted"><%= change.category %></span>/<strong><%= change.package %><%= "-#{change.version}" if change[:version] %></strong>
     </a>
   </td>
-  <td><%= Package.find_by(:atom, cp_to_atom(change.category, change.package)).description %></td>
+  <td><%= package.description %></td>
 </tr>
+<%- end -%>
