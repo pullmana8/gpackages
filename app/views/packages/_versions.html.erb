@@ -3,8 +3,11 @@
     <h3 class="panel-title">
       <%= t :box_versions %>
       <span class="pull-right">
-        <a href="<%= about_help_path(anchor: 'keyword-legend') %>" aria-label="<%= t :show_table_legend %>" title="<%= t :legend %>" class="kk-box-meta-link" tabindex="0" role="button" id="kk-keyword-legend-btn">
-          <span class="fa fa-fw fa-question-circle"></span>
+        <a href="javascript:" aria-label="<%= t :show_table_legend %>" title="<%= t :legend %>" class="kk-box-meta-link" tabindex="0" role="button" id="kk-customize-btn">
+          <%= octicon 'gear', :height => 16 %> Settings
+        </a>
+        <a href="<%= about_help_path(anchor: 'keyword-legend') %>" aria-label="<%= t :show_table_legend %>" title="<%= t :legend %>" class="kk-box-meta-link last" tabindex="0" role="button" id="kk-keyword-legend-btn">
+          <%= octicon 'question', :height => 16 %> Legend
         </a>
       </span>
     </h3>

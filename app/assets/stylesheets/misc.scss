@@ -157,10 +157,21 @@ a.kk-box-meta-link:link,
 a.kk-box-meta-link:active,
 a.kk-box-meta-link:visited {
   color: #aaa;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10pt;
 }
 
 a.kk-box-meta-link:hover {
   color: #555;
+}
+
+a.kk-box-meta-link {
+  margin-right: 1em;
+
+  &.last {
+    margin-right: 0;
+  }
 }
 
 .kk-header-container {
