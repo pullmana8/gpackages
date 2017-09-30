@@ -11,6 +11,7 @@
 
 # Deployment
 /vendor/bundle
+/vendor/cache
 /config/secrets.yml
 /config/initializers/kkuleomi_config.rb
 /public/assets
