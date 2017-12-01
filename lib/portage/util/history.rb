@@ -5,7 +5,7 @@ class Portage::Util::History
     def for(category, package, limit = 20)
       return [] if KKULEOMI_DISABLE_GIT == true
 
-      files = "#{category}/#{package}/*.ebuild"
+      files = "#{category}/#{package}/"
       git = Kkuleomi::Util::Exec
             .cmd(KKULEOMI_GIT)
             .in(KKULEOMI_RUNTIME_PORTDIR)
