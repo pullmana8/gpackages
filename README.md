@@ -7,7 +7,13 @@ Copyright © 2015–17 [Alex Legler](mailto:a3li@gentoo.org)
 
 ## Installation instructions
 
-soon
+
+## Configuration
+
+ELASTICSEARCH_URL is where the app thinks ES lives; it defaults to localhost:9200.
+REDIS_URL is the URL where sidekiq looks for redis. It defaults to localhost:6379.
+
+Configure config/secrets.yml.
 
 ## Contributions
 
