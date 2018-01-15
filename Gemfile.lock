@@ -60,10 +60,10 @@ GEM
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    elasticsearch (1.0.15)
-      elasticsearch-api (= 1.0.15)
-      elasticsearch-transport (= 1.0.15)
-    elasticsearch-api (1.0.15)
+    elasticsearch (6.0.0)
+      elasticsearch-api (= 6.0.0)
+      elasticsearch-transport (= 6.0.0)
+    elasticsearch-api (6.0.0)
       multi_json
     elasticsearch-model (0.1.8)
       activesupport (> 3)
@@ -77,7 +77,7 @@ GEM
       hashie
       virtus
     elasticsearch-rails (0.1.8)
-    elasticsearch-transport (1.0.15)
+    elasticsearch-transport (6.0.0)
       faraday
       multi_json
     equalizer (0.0.11)
