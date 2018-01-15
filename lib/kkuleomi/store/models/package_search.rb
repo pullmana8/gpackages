@@ -31,8 +31,8 @@ module Kkuleomi::Store::Models::PackageSearch
     def find_atoms_by_useflag(useflag)
       Version.search(
         query: {
-          filtered: {
-            query: { match_all: {} },
+          bool: {
+            must: { match_all: {} },
             filter: { term: { use: useflag } }
           }
         },
