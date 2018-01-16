@@ -9,7 +9,7 @@ module Kkuleomi::Store::Model
     def find_all_by(field, value, opts = {})
       search({
         size: 10_000,
-        query: { bool: { filter: { term: { field => value } } }
+        query: { bool: { filter: { term: { field => value } } } }
       }.merge(opts))
     end
 
