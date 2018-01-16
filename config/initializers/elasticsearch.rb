@@ -1,6 +1,6 @@
 require 'elasticsearch/persistence/model'
 
-Elasticsearch::Persistence.client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL'] || 'localhost:9200'
+Elasticsearch::Persistence.client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL'] || 'elasticsearch:9300'
 
 if Rails.env.development?
   logger           = ActiveSupport::Logger.new(STDERR)
