@@ -37,8 +37,8 @@ module Kkuleomi::Store::Model
           bool: {
             filter: {
               has_parent: {
-                type: parent.class.document_type,
-                filter: { term: { _id: parent.id } }
+                parent_type: parent.class.document_type,
+                query: { term: { _id: parent.id } }
               }
             },
             must: { match_all: {} }
