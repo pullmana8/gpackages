@@ -5,11 +5,11 @@ module Kkuleomi::Store
 
   def self.create_index(force = false)
 		types = [
-			Category
-			Package
-			Version
-			Change
-			Useflag
+			Category,
+			Package,
+			Version,
+			Change,
+			Useflag,
 		]
 
     base_settings = {
