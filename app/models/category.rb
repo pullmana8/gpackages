@@ -2,11 +2,11 @@ class Category
   include Elasticsearch::Persistence::Model
   include Kkuleomi::Store::Model
 
-  index_name "packages-#{Rails.env}"
+  index_name "categories-#{Rails.env}"
 
-  attribute :name,          String, mapping: { index: 'not_analyzed' }
-  attribute :description,   String
-  attribute :metadata_hash, String, mapping: { index: 'not_analyzed' }
+  attribute :name,          String, mapping: { type: 'text' }
+  attribute :description,   String, mapping: { type: 'text' }
+  attribute :metadata_hash, String, mapping: { type: 'text' }
 
   # Determines if the document model needs an update from the repository model
   #
