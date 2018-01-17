@@ -36,7 +36,7 @@ module Kkuleomi::Store::Model
 				query: {
 				  bool: {
 						filter: {
-						  term: { package: package } }
+						  term: { package: package }
 						}
 					},
 					must: { match_all: {} }
