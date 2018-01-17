@@ -30,6 +30,20 @@ module Kkuleomi::Store::Model
       find_all_by(field, value, opts).first
     end
 
+		def find_all_by_package(package, opts = {})
+			search(opts.merge(
+				size: 10_000,
+				query: {
+				  bool: {
+						filter: {
+						  term: { package: package } }
+						}
+					},
+					must: { match_all: {} }
+				}
+			))
+		end
+
     def find_all_by_parent(parent, opts = {})
       search(opts.merge(
         size: 10_000,
