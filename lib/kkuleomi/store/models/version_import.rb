@@ -60,7 +60,7 @@ module Kkuleomi::Store::Models::VersionImport
     # @param [Package] parent Parent package model
     def set_sort_key!(key, parent)
       self.sort_key = key
-      save(parent: parent.id)
+      save()
     end
 
     def strip_useflag_defaults(flags)
