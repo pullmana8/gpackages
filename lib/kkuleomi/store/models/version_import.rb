@@ -38,7 +38,7 @@ module Kkuleomi::Store::Models::VersionImport
       self.masks = Portage::Util::Masks.for(ebuild_model)
       self.metadata_hash = ebuild_model.metadata_hash
 
-      save(parent: parent_package.id)
+      save()
 
       # If keywords changed, calculate changes and record as needed (but only do that if we should)
       unless options[:suppress_change_objects]

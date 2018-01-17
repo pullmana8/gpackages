@@ -39,7 +39,6 @@ module Kkuleomi::Store::Model
 						  term: { package: package }
 						}
 					},
-					must: { match_all: {} }
 				}
 			))
 		end
