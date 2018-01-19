@@ -147,7 +147,7 @@ module Kkuleomi::Store::Models::PackageSearch
       [
         {
           filter: { term: { category: 'virtual' } },
-          boost_factor: 0.6
+          weight: 0.6
         }
       ]
     end
