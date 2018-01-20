@@ -40,7 +40,7 @@ module Kkuleomi::Store::Models::PackageSearch
           group_by_package: {
             terms: {
               field: 'package',
-              order: { '_term' => 'asc' }
+              order: { '_key' => 'asc' }
             }
           }
         },
