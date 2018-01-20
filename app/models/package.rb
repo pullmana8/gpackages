@@ -14,8 +14,8 @@ class Package
   attribute :name,            String, mapping: raw_fields
   attribute :name_sort,       String, mapping: raw_fields
   attribute :atom,            String, mapping: raw_fields
-  attribute :description,     String, mapping: raw_fields
-  attribute :longdescription, String, mapping: raw_fields
+  attribute :description,     String, mapping: { type: 'text' }
+  attribute :longdescription, String, mapping: { type: 'text' }
   attribute :homepage,        String, default: [], mapping: raw_fields
   attribute :license,         String, mapping: raw_fields
   attribute :licenses,        String, default: [], mapping: raw_fields
