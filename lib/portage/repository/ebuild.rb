@@ -1,3 +1,4 @@
+require 'digest'
 class Portage::Repository::Ebuild
   attr_reader :package, :name, :path, :version, :category, :repo_root
 

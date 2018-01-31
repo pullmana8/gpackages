@@ -1,3 +1,4 @@
+require 'digest'
 class Portage::Util::Metadata
   def initialize(file)
     @metadata = {}

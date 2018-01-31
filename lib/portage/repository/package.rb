@@ -1,3 +1,4 @@
+require 'digest'
 class Portage::Repository::Package
   attr_reader :category, :name, :path
 

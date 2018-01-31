@@ -1,3 +1,4 @@
+require 'digest'
 class Portage::Util::MetadataCache
   # Parses the metadata cache entries for the given ebuild
   #
