@@ -14,9 +14,14 @@ KKULEOMI_GIT='git'
 # Who gets feedback
 KKULEOMI_FEEDBACK_RECIPIENT='a3li@gentoo.org'
 
+# Default arches.
+KKULEOMI_ARCHES=%w(amd64 x86 alpha arm hppa ia64 ppc ppc64 sparc)
+
 # Cache settings
 # deployment:
-# Rails.application.config.cache_store = :mem_cache_store, '127.0.0.1'
+if ENV["MEMCACHE_URL"]
+	Rails.application.config.cache_store = :mem_cache_store, ENV['MEMCACHE_URL']
+end
 
 # development:
 # Rails.application.config.cache_store = :memory_store, { size: 64.megabytes }
