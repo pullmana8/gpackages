@@ -25,7 +25,7 @@ en:
   legend: "Legend"
   show_table_legend: "Show table legend"
   changelog: "Changelog"
-  data_current_as_of: "Data currrent as of"
+  data_current_as_of: "Data current as of"
   git_commit: "Git commit"
   # Keywords
   keyword_table_legend: "Keyword table legend"
