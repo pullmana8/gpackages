@@ -103,7 +103,7 @@ module Kkuleomi::Store::Models::PackageImport
     end
 
     def import_versions!(package_model, ebuilds, options)
-      index_v = Hash[Version.find_all_by_package(self.name).map { |v| [v.version, v] }]
+      index_v = Hash[Version.find_all_by(:package, self.name).map { |v| [v.version, v] }]
       model_v = Hash[ebuilds.map { |v| [v.version, v] }]
 
       index_keys = index_v.keys
