@@ -44,7 +44,7 @@ class Package
   end
 
   def versions
-    @versions ||= Version.find_all_by(:package, name, sort: { sort_key: { order: 'asc' } })
+    @versions ||= Version.find_all_by(:package, atom, sort: { sort_key: { order: 'asc' } })
   end
 
   def latest_version
