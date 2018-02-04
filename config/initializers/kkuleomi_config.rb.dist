@@ -15,7 +15,7 @@ KKULEOMI_GIT='git'
 KKULEOMI_DISABLE_GIT=false
 
 # Who gets feedback
-KKULEOMI_FEEDBACK_RECIPIENT='a3li@gentoo.org'
+KKULEOMI_FEEDBACK_RECIPIENT='gpackages@gentoo.org'
 
 # Cache settings
 # deployment:
