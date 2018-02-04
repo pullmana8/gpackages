@@ -28,19 +28,17 @@ module Kkuleomi::Store
                     filter: %w(lowercase autocomplete_filter)
                 }
             }
-        }
+        },
+				mapping: { total_fields: { limit: 25000 } }
     }
-
-
 
 		# In ES 1.5, we could use 1 mega-index. But in ES6, each model needs its own.
 		types.each { |type|
 						client = type.gateway.client
 						client.indices.delete(index: type.index_name) rescue nil if force
 						body = {
-							settings: type.settings.to_hash,
-						 	mappings: type.mappings.to_hash,
-							index: { "mapping.total_fields.limit" => 25000 },
+							settings: type.settings.to_hash.merge(base_settings),
+						 	mappings: type.mappings.to_hash
 						}
 						client.indices.create(index: type.index_name, body: body)
 		}
