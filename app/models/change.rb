@@ -2,7 +2,7 @@ class Change
   include Elasticsearch::Persistence::Model
   include Kkuleomi::Store::Model
 
-  index_name "changes-#{Rails.env}"
+  index_name "change-#{Rails.env}"
 
   attribute :package,     String, mapping: { type: 'keyword' }
   attribute :category,    String, mapping: { type: 'keyword' }

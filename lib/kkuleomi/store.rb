@@ -8,7 +8,7 @@ module Kkuleomi::Store
 			Category,
 			Package,
 			Version,
-			Changes,
+			Change,
 			Useflag,
 		]
 
