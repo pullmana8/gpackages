@@ -30,9 +30,10 @@ module Kkuleomi::Store::Models::PackageSearch
     # Results are aggregated by package atoms.
     def find_atoms_by_useflag(useflag)
       Version.search(
+        size: 10000, # default limit is 10.
         query: {
-          filtered: {
-            query: { match_all: {} },
+          bool: {
+            must: { match_all: {} },
             filter: { term: { use: useflag } }
           }
         },
@@ -40,8 +41,7 @@ module Kkuleomi::Store::Models::PackageSearch
           group_by_package: {
             terms: {
               field: 'package',
-              size: 0,
-              order: { '_term' => 'asc' }
+              order: { '_key' => 'asc' }
             }
           }
         },
@@ -147,7 +147,7 @@ module Kkuleomi::Store::Models::PackageSearch
       [
         {
           filter: { term: { category: 'virtual' } },
-          boost_factor: 0.6
+          weight: 0.6
         }
       ]
     end

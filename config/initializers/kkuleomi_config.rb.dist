@@ -11,8 +11,11 @@ KKULEOMI_FIRST_COMMIT='c1de71edb35b118c3244c0d9d1b3f97c93d41969'
 # Where does git(1) live?
 KKULEOMI_GIT='git'
 
+# GIT enabled?
+KKULEOMI_DISABLE_GIT=false
+
 # Who gets feedback
-KKULEOMI_FEEDBACK_RECIPIENT='a3li@gentoo.org'
+KKULEOMI_FEEDBACK_RECIPIENT='gpackages@gentoo.org'
 
 # Default arches.
 KKULEOMI_ARCHES=%w(amd64 x86 alpha arm hppa ia64 ppc ppc64 sparc)

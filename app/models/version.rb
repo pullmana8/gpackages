@@ -3,21 +3,21 @@ class Version
   include Kkuleomi::Store::Model
   include Kkuleomi::Store::Models::VersionImport
 
-  index_name "packages-#{Rails.env}"
+  index_name "versions-#{Rails.env}"
 
-  attribute :version,       String,  mapping: { index: 'not_analyzed' }
-  attribute :package,       String,  mapping: { index: 'not_analyzed' }
-  attribute :atom,          String,  mapping: { index: 'not_analyzed' }
-  attribute :sort_key,      Integer, mapping: { index: 'not_analyzed' }
-  attribute :slot,          String,  mapping: { index: 'not_analyzed' }
-  attribute :subslot,       String,  mapping: { index: 'not_analyzed' }
-  attribute :eapi,          String,  mapping: { index: 'not_analyzed' }
-  attribute :keywords,      String,  mapping: { index: 'not_analyzed' }
+  attribute :version,       String,  mapping: { type: 'keyword' }
+  attribute :package,       String,  mapping: { type: 'keyword' }
+  attribute :atom,          String,  mapping: { type: 'keyword' }
+  attribute :sort_key,      Integer, mapping: { type: 'keyword' }
+  attribute :slot,          String,  mapping: { type: 'keyword' }
+  attribute :subslot,       String,  mapping: { type: 'keyword' }
+  attribute :eapi,          String,  mapping: { type: 'keyword' }
+  attribute :keywords,      String,  mapping: { type: 'keyword' }
   attribute :masks,         Array,   default: [], mapping: { type: 'object' }
-  attribute :use,           String,  default: [], mapping: { index: 'not_analyzed' }
-  attribute :restrict,      String,  default: [], mapping: { index: 'not_analyzed' }
-  attribute :properties,    String,  default: [], mapping: { index: 'not_analyzed' }
-  attribute :metadata_hash, String,  mapping: { index: 'not_analyzed' }
+  attribute :use,           String,  default: [], mapping: { type: 'keyword' }
+  attribute :restrict,      String,  default: [], mapping: { type: 'keyword' }
+  attribute :properties,    String,  default: [], mapping: { type: 'keyword' }
+  attribute :metadata_hash, String,  mapping: { type: 'keyword' }
 
   # Returns the keywording state on a given architecture
   #

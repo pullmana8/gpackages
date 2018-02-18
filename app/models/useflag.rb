@@ -2,13 +2,13 @@ class Useflag
   include Elasticsearch::Persistence::Model
   include Kkuleomi::Store::Model
 
-  index_name "packages-#{Rails.env}"
+  index_name "useflags-#{Rails.env}"
 
-  attribute :name,              String, mapping: { index: 'not_analyzed' }
-  attribute :description,       String
-  attribute :atom,              String, mapping: { index: 'not_analyzed' }
-  attribute :scope,             String, mapping: { index: 'not_analyzed' }
-  attribute :use_expand_prefix, String, mapping: { index: 'not_analyzed' }
+  attribute :name,              String, mapping: { type: 'keyword' }
+  attribute :description,       String, mapping: { type: 'text' }
+  attribute :atom,              String, mapping: { type: 'keyword' }
+  attribute :scope,             String, mapping: { type: 'keyword' }
+  attribute :use_expand_prefix, String, mapping: { type: 'keyword' }
 
   def all_fields
     [:name, :description, :atom, :scope, :use_expand_prefix]

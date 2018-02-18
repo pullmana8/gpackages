@@ -9,9 +9,7 @@ module Kkuleomi::Store::Model
     def find_all_by(field, value, opts = {})
       search({
         size: 10_000,
-        query: {
-          filtered: { filter: { term: { field => value } } }
-        }
+        query: { bool: { filter: { term: { field => value } } } }
       }.merge(opts))
     end
 
@@ -22,7 +20,7 @@ module Kkuleomi::Store::Model
 
       search({
         query: {
-          filtered: { filter: { bool: { must: filter_args } } }
+          bool: { filter: { bool: { must: filter_args } } }
         },
         size: 10_000
       }.merge(opts))
@@ -36,14 +34,14 @@ module Kkuleomi::Store::Model
       search(opts.merge(
         size: 10_000,
         query: {
-          filtered: {
+          bool: {
             filter: {
               has_parent: {
-                type: parent.class.document_type,
-                filter: { term: { _id: parent.id } }
+                parent_type: parent.class.document_type,
+                query: { term: { _id: parent.id } }
               }
             },
-            query: { match_all: {} }
+            must: { match_all: {} }
           }
         }
       ))

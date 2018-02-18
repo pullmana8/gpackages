@@ -4,26 +4,15 @@ module Kkuleomi::Store
   end
 
   def self.create_index(force = false)
-    client = Category.gateway.client
-    index_name = Category.index_name
+		types = [
+			Category,
+			Package,
+			Version,
+			Change,
+			Useflag,
+		]
 
-    settings_list = [
-      Category.settings.to_hash,
-      Package.settings.to_hash,
-      Version.settings.to_hash,
-      Change.settings.to_hash,
-      Useflag.settings.to_hash
-    ]
-
-    mappings_list = [
-      Category.mappings.to_hash,
-      Package.mappings.to_hash,
-      Version.mappings.to_hash,
-      Change.mappings.to_hash,
-      Useflag.mappings.to_hash
-    ]
-
-    settings = {
+    base_settings = {
         analysis: {
             filter: {
                 autocomplete_filter: {
@@ -39,15 +28,19 @@ module Kkuleomi::Store
                     filter: %w(lowercase autocomplete_filter)
                 }
             }
-        }
+        },
+				mapping: { total_fields: { limit: 25000 } }
     }
-    settings_list.each { |setting| settings.merge! setting }
 
-    mappings = {}
-    mappings_list.each { |mapping| mappings.merge! mapping }
-
-    client.indices.delete(index: index_name) rescue nil if force
-
-    client.indices.create(index: index_name, body: { settings: settings, mappings: mappings })
+		# In ES 1.5, we could use 1 mega-index. But in ES6, each model needs its own.
+		types.each { |type|
+						client = type.gateway.client
+						client.indices.delete(index: type.index_name) rescue nil if force
+						body = {
+							settings: type.settings.to_hash.merge(base_settings),
+						 	mappings: type.mappings.to_hash
+						}
+						client.indices.create(index: type.index_name, body: body)
+		}
   end
 end

@@ -6,19 +6,23 @@ class Package
 
   index_name "packages-#{Rails.env}"
 
-  attribute :category,        String, mapping: { index: 'not_analyzed' }
-  attribute :name,            String, mapping: { index: 'not_analyzed' }
-  attribute :name_sort,       String, mapping: { index: 'not_analyzed' }
-  attribute :atom,            String, mapping: { index: 'not_analyzed' }
-  attribute :description,     String
-  attribute :longdescription, String
-  attribute :homepage,        String, default: [], mapping: { index: 'not_analyzed' }
-  attribute :license,         String, mapping: { index: 'not_analyzed' }
-  attribute :licenses,        String, default: [], mapping: { index: 'not_analyzed' }
-  attribute :herds,           String, default: [], mapping: { index: 'not_analyzed' }
+  raw_fields = {
+		type: 'keyword'
+	}
+
+  attribute :category,        String, mapping: raw_fields
+  attribute :name,            String, mapping: raw_fields
+  attribute :name_sort,       String, mapping: raw_fields
+  attribute :atom,            String, mapping: raw_fields
+  attribute :description,     String, mapping: { type: 'text' }
+  attribute :longdescription, String, mapping: { type: 'text' }
+  attribute :homepage,        String, default: [], mapping: raw_fields
+  attribute :license,         String, mapping: raw_fields
+  attribute :licenses,        String, default: [], mapping: raw_fields
+  attribute :herds,           String, default: [], mapping: raw_fields
   attribute :maintainers,     Array,  default: [], mapping: { type: 'object' }
   attribute :useflags,        Hash,   default: {}, mapping: { type: 'object' }
-  attribute :metadata_hash,   String, mapping: { index: 'not_analyzed' }
+  attribute :metadata_hash,   String, mapping: raw_fields
 
   def category_model
     @category_model ||= Category.find_by(:name, category)
@@ -40,7 +44,7 @@ class Package
   end
 
   def versions
-    @versions ||= Version.find_all_by_parent(self, sort: { sort_key: { order: 'asc' } })
+    @versions ||= Version.find_all_by(:package, atom, sort: { sort_key: { order: 'asc' } })
   end
 
   def latest_version
