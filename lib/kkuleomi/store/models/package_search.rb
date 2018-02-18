@@ -30,6 +30,7 @@ module Kkuleomi::Store::Models::PackageSearch
     # Results are aggregated by package atoms.
     def find_atoms_by_useflag(useflag)
       Version.search(
+        size: 10000, # default limit is 10.
         query: {
           bool: {
             must: { match_all: {} },
