@@ -30,7 +30,7 @@ module Kkuleomi::Store::Models::PackageSearch
     # Results are aggregated by package atoms.
     def find_atoms_by_useflag(useflag)
       Version.search(
-        size: 10000, # default limit is 10.
+        size: 0, # collect all packages.
         query: {
           bool: {
             must: { match_all: {} },
@@ -41,11 +41,14 @@ module Kkuleomi::Store::Models::PackageSearch
           group_by_package: {
             terms: {
               field: 'package',
-              order: { '_key' => 'asc' }
+              order: { '_key' => 'asc' },
+              # https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
+              # ES actually dislikes large sizes like this (it defines 10k buckets basically) and it will be *very* expensive but lets try it and see.
+              # Other limits in this app are also 10k mostly to 'make things fit kinda'.
+              size: 10000,
             }
           }
         },
-        size: 0
       ).response.aggregations['group_by_package'].buckets
     end
 
