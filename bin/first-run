@@ -1,0 +1,8 @@
+#!/bin/bash
+
+bundle install --deployment
+bundle exec rake tmp:create
+bundle exec rake assets:precompile
+bundle exec rake kkuleomi:index:init
+bundle exec rake kkuleomi:seed:all
+./update-all.sh
