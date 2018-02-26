@@ -47,13 +47,16 @@ class Package
     @versions ||= Version.find_all_by(:package, atom, sort: { sort_key: { order: 'asc' } })
   end
 
+  def unique_versions
+    versions.uniq { |v| v.version }
+  end
+
   def latest_version
     versions.first
   end
 
   def version(version_str)
     versions.each { |version| return version if version.version == version_str }
-
     nil
   end
 
