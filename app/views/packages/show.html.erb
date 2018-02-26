@@ -2,7 +2,7 @@
 <% cache "#{@package.atom}-#{@package.metadata_hash}" do %>
 <div class="row">
   <div class="col-md-9">
-    <%= render partial: 'versions', object: @package.versions, as: 'versions' %>
+    <%= render partial: 'versions', object: @package.unique_versions, as: 'versions' %>
 
     <% if @package.removal_pending? %>
     <%= render partial: 'removal_notice', object: @package, as: 'package' %>
