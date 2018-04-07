@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <strong><%= annotate_bugs changelog[:message].lines.first %></strong>
+  <strong><%= annotate_bugs changelog[:message].lines %></strong>
   <br>
   <div class="kk-byline">
     <%= mail_to changelog[:email], changelog[:author] %>,
