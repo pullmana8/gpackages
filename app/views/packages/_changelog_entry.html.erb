@@ -1,7 +1,7 @@
 <li class="list-group-item">
   <strong><%= annotate_bugs changelog[:message].lines.first %></strong>
   <br>
-  <%= changelog[:message].lines[1..-1].map {|line| annotate_bugs line}.join %>
+  <%= changelog[:message].lines[1..-1].map {|line| annotate_bugs line}.safe_join %>
   <br>
   <div class="kk-byline">
     <%= mail_to changelog[:email], changelog[:author] %>,
