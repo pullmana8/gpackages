@@ -18,7 +18,7 @@ KKULEOMI_DISABLE_GIT=false
 KKULEOMI_FEEDBACK_RECIPIENT='gpackages@gentoo.org'
 
 # Default arches.
-KKULEOMI_ARCHES=%w(amd64 x86 alpha arm hppa ia64 ppc ppc64 sparc)
+KKULEOMI_ARCHES=%w(amd64 x86 alpha arm arm64 hppa ia64 ppc ppc64 sparc)
 
 # Cache settings
 # deployment:
