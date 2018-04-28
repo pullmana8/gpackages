@@ -32,14 +32,14 @@ module PackagesHelper
 	# This parses commit messages for GLEP66 style bug annotations.
 	# Bug: https://bugs.gentoo.org/NNNNNN
 	# Closes: https://bugs.gentoo.org/NNNNNN
-	def glep66_bugs(commit_msg)
-		bugs_list = []
-		commit_msg.each_line do |line| {
-			bugno = line[/(Bug\:|Closes\:)\s+https:\/\/bugs\.gentoo\.org\/(\d+)/, 1]
-			bugs_list << "https://bugs.gentoo.org/#{bugno}" if !bugno.nil?
-		}
-		bugs_list
-	end
+	#def glep66_bugs(commit_msg)
+	#	bugs_list = []
+	#	commit_msg.each_line do |line| {
+	#		bugno = line[/(Bug\:|Closes\:)\s+https:\/\/bugs\.gentoo\.org\/(\d+)/, 1]
+	#		bugs_list << "https://bugs.gentoo.org/#{bugno}" if !bugno.nil?
+	#	}
+	#	bugs_list
+	#end
 
   def annotate_bugs(str)
     annotated_str = str.gsub(/([bB]ug\s+|[bB]ug\s+#|#)(\d+)/) do
