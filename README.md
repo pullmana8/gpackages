@@ -6,7 +6,7 @@ internally codenamed kkuleomi/꾸러미 which is Korean for package (who would h
 Copyright © 2015–17 [Alex Legler](mailto:a3li@gentoo.org)
 
 ## Installation instructions
-
+ 
 
 ## Configuration
 
