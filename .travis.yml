@@ -10,3 +10,4 @@ before_script:
   - cp config/secrets.yml.dist config/secrets.yml
   # Wait for Elasticsearch
   - sleep 10
+  - bundle exec rake kkuleomi:index:init
