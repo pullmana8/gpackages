@@ -3,5 +3,10 @@ cache: bundler
 rvm:
   - 2.2
 
+services:
+  - elasticsearch
+
 before_script:
   - cp config/secrets.yml.dist config/secrets.yml
+  # Wait for Elasticsearch
+  - sleep 10
