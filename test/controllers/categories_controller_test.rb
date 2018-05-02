@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class CategoriesControllerTest < ActionController::TestCase
-  setup do
-    @category = categories(:one)
-  end
-
   test "should get index" do
     get :index
     assert_response :success
