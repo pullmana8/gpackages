@@ -34,6 +34,7 @@ gem 'thin'
 
 gem 'sinatra', require: false
 gem 'sidekiq', require: false
+gem 'did_you_mean', '1.0.2', require: false # Sidekiq missing dep
 
 gem 'rdiscount'
 
