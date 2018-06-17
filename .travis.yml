@@ -4,6 +4,10 @@ rvm:
   - 2.2
   - 2.5
 
+gemfiles:
+  - Gemfile
+  - Gemfile.ci # rails 5
+
 branches:
   only:
     - master
