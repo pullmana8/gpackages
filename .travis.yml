@@ -6,6 +6,7 @@ rvm:
 
 services:
   - elasticsearch
+  - redis-server
 
 before_script:
   - cp config/secrets.yml.dist config/secrets.yml
