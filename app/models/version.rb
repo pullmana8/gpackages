@@ -8,7 +8,7 @@ class Version
   attribute :version,       String,  mapping: { type: 'keyword' }
   attribute :package,       String,  mapping: { type: 'keyword' }
   attribute :atom,          String,  mapping: { type: 'keyword' }
-  attribute :sort_key,      Integer, mapping: { type: 'keyword' }
+  attribute :sort_key,      Integer, mapping: { type: 'integer' }
   attribute :slot,          String,  mapping: { type: 'keyword' }
   attribute :subslot,       String,  mapping: { type: 'keyword' }
   attribute :eapi,          String,  mapping: { type: 'keyword' }
