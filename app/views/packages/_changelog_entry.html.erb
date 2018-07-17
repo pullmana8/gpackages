@@ -1,8 +1,5 @@
 <li class="list-group-item">
   <strong><%= annotate_bugs changelog[:message].lines.first %></strong>
-  <br>
-	<!-- Bugs: <%= safe_join(glep66_bugs(changelog[:message].lines[1..-1]).each {|l| annotate_bugs l}, ',') %> -->
-  <br>
   <div class="kk-byline">
     <%= mail_to changelog[:email], changelog[:author] %>,
     <%= i18n_date(changelog[:date]) %>,
