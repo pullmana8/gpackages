@@ -29,7 +29,7 @@ module Kkuleomi::Store
                 }
             }
         },
-				index: { mapper: { dynamic: 'strict' } },
+				index: { mapper: { dynamic: false } },
 				mapping: { total_fields: { limit: 50000 } }
     }
 
