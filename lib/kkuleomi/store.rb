@@ -29,7 +29,8 @@ module Kkuleomi::Store
                 }
             }
         },
-		mapping: { total_fields: { limit: 50000 } }
+				index: { mapper: { dynamic: 'strict' } },
+				mapping: { total_fields: { limit: 50000 } }
     }
 
 		# In ES 1.5, we could use 1 mega-index. But in ES6, each model needs its own.
