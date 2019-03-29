@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.0'
-# Use mysql as the database for Active Record
-# gem 'mysql2'
+gem 'rails', '5.2.3'
+
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
+# Sass-rails deprecated, use sassc instead
+gem 'sassc'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -28,13 +30,14 @@ gem 'ruby-progressbar'
 gem 'git'
 gem 'thin'
 
-gem 'sinatra', require: false
-gem 'sidekiq', require: false
+# Removed false
+gem 'sinatra'
+gem 'sidekiq'
 
 gem 'rdiscount'
 
 # Sidekiq bug?
-gem 'did_you_mean', require: false # Sidekiq missing dep
+gem 'did_you_mean', '~> 1.1', '>= 1.1.2'
 
 # UI
 gem 'octicons_helper'
