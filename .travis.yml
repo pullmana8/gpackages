@@ -15,6 +15,11 @@ services:
   - elasticsearch
   - redis-server
 
+before_install:
+    - gem update --system
+    - gem --version
+    - gem install bundler
+
 before_script:
   - cp config/secrets.yml.dist config/secrets.yml
   # Wait for Elasticsearch
