@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+# gem 'rails', '4.2.7.1'
+gem 'rails', '~> 5.2', '>= 5.2.3'
+
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
@@ -38,7 +40,8 @@ gem 'sidekiq', require: false
 gem 'rdiscount'
 
 # Sidekiq bug?
-gem 'did_you_mean', '1.0.2', require: false # Sidekiq missing dep
+# gem 'did_you_mean', '1.0.2', require: false # Sidekiq missing dep
+gem 'did_you_mean', '~> 1.1', '>= 1.1.2'
 
 # UI
 gem 'octicons_helper'
