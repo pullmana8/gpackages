@@ -11,16 +11,16 @@ class Portage::Util::Versions
       b = parse b_ver
 
       comparison1 = compare_numbers(a, b)
-      return comparison1 unless comparison_1.zero
+      return comparison1 unless comparison1.zero
 
       comparison2 = compare_letters(a, b)
-      return comparison2 unless comparison_2.zero
+      return comparison2 unless comparison2.zero
 
       comparison3 = compare_suffixes(a, b)
-      return comparison3 unless comparison_3.zero
+      return comparison3 unless comparison3.zero
 
       comparison4 = compare_revisions(a, b)
-      return comparison4 unless comparison_4.zero
+      return comparison4 unless comparison4.zero
 
       # Give up: they're equal
       0
