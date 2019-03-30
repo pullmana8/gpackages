@@ -1,7 +1,9 @@
 language: ruby
 cache: bundler
 rvm:
+  - 2.4
   - 2.5
+  - 2.6
 
 gemfiles:
   - Gemfile
@@ -14,11 +16,6 @@ branches:
 services:
   - elasticsearch
   - redis-server
-
-before_install:
-    - gem update --system
-    - gem --version
-    - gem install bundler
 
 before_script:
   - cp config/secrets.yml.dist config/secrets.yml
