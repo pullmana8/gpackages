@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-# gem 'rails', '4.2.7.1'
+# gem 'rails', '4.2.7.1
+
 gem 'rails', '~> 5.2', '>= 5.2.3'
 
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
+gem 'sassc'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -24,6 +27,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'bootsnap'
+
 # packages stuff
 gem 'elasticsearch-rails'
 gem 'elasticsearch-persistence'
@@ -34,14 +39,15 @@ gem 'ruby-progressbar'
 gem 'git'
 gem 'thin'
 
-gem 'sinatra', require: false
-gem 'sidekiq', require: false
+gem 'sinatra'
+gem 'sidekiq'
 
 gem 'rdiscount'
 
+gem 'listen'
 # Sidekiq bug?
 # gem 'did_you_mean', '1.0.2', require: false # Sidekiq missing dep
-gem 'did_you_mean', '~> 1.1', '>= 1.1.2'
+gem 'did_you_mean'
 
 # UI
 gem 'octicons_helper'
