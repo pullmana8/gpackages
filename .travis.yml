@@ -5,13 +5,22 @@ rvm:
   - 2.5
   - 2.4
 
+# adds before install to help with bundler version
+before_install:
+  - gem install bundler
+  - bundle install
+
 gemfiles:
   - Gemfile
-  - Gemfile.ci # rails 5
+  - Gemfile.ci
 
+# added other branches for testing
 branches:
   only:
     - master
+    - ruby25
+    - ruby24
+    - travis
 
 services:
   - elasticsearch
@@ -21,4 +30,4 @@ before_script:
   - cp config/secrets.yml.dist config/secrets.yml
   # Wait for Elasticsearch
   - sleep 10
-  - bundle exec rake kkuleomi:index:init
+  
