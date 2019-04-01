@@ -1,4 +1,9 @@
 # This file is used by Rack-based servers to start the application.
+require "rubygems"
+require "geminabox"
 
-require ::File.expand_path('../config/environment', __FILE__)
+Geminabox.data = "./data"
+run Geminabox::Server
+
+require ::File.expand_path("../config/environment', __FILE__")
 run Rails.application

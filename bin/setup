@@ -17,9 +17,12 @@ chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
+<<<<<<< Updated upstream
   # Install JavaScript dependencies if using Yarn
   # system('bin/yarn')
 
+=======
+>>>>>>> Stashed changes
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
 

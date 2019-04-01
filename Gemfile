@@ -34,6 +34,7 @@ gem 'bootsnap'
 # packages stuff
 gem 'elasticsearch-rails'
 gem 'elasticsearch-persistence'
+gem 'elasticsearch-dsl'
 
 gem 'nokogiri'
 gem 'parallel'
