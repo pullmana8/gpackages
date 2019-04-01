@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 # Consider using webpacker
-gem 'webpacker', '~> 4.0', '>= 4.0.2'
+# gem 'webpacker', '~> 4.0', '>= 4.0.2'
 
 gem 'bootsnap'
 gem 'puma'
