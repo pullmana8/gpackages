@@ -2,25 +2,17 @@ language: ruby
 cache: bundler
 rvm:
   - 2.6 # testing ruby26
-  - 2.5
-  - 2.4
 
-# adds before install to help with bundler version
 before_install:
   - gem install bundler
   - bundle install
 
 gemfiles:
   - Gemfile
-  - Gemfile.ci
 
-# added other branches for testing
 branches:
   only:
     - master
-    - ruby25
-    - ruby24
-    - travis
 
 services:
   - elasticsearch
@@ -28,6 +20,5 @@ services:
 
 before_script:
   - cp config/secrets.yml.dist config/secrets.yml
-  # Wait for Elasticsearch
   - sleep 10
   
