@@ -33,7 +33,10 @@ gem 'sidekiq'
 gem 'rdiscount'
 gem 'octicons_helper'
 
-gem 'did_you_mean'
+# REQUIRED RUBY VERSION: >= 2.5.0
+# update versions to keep with dev-ruby/did_you_mean 1.2.1 version
+# [https://packages.gentoo.org/packages/dev-ruby/did_you_mean]
+gem 'did_you_mean', '~> 1.2', '>= 1.2.1'
 
 group :development do
   gem 'byebug'
