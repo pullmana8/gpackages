@@ -7,9 +7,9 @@ rvm:
 
 # adds before install to help with bundler version
 before_install:
-  - sed -i '1d' Gemfile
-  - gem install bundler -v 1.17.3
-  - bundle _1.17.3_ install
+#  - sed -i '1d' Gemfile
+  - gem install bundler
+  - bundle install
 
 gemfiles:
   - Gemfile
