@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 ruby '2.6.2'
 gem 'rails', '~> 5.2', '>= 5.2.3'
 
+# Ruby Sass EOL [https://github.com/rails/rails/issues/32896]
+# gem 'sass-rails', '~> 5.0'
+# Use sassc instead
 gem 'sassc'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
