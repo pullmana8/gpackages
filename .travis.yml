@@ -1,7 +1,9 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.6
+  - 2.6 # testing ruby26
+  - 2.5
+  - 2.4
 
 gemfiles:
   - Gemfile
