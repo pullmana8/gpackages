@@ -25,11 +25,8 @@ gem 'elasticsearch'
 # Added model, rails, persistence for ease of transitions on rewriting kkuleomi files
 gem 'elasticsearch-model'
 gem 'elasticsearch-persistence'
-<<<<<<< HEAD
 gem 'elasticsearch-dsl'
-=======
 gem 'elasticsearch-rails'
->>>>>>> master
 
 gem 'git'
 gem 'nokogiri'
