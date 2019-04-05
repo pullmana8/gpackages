@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-class Category
-  include Elasticsearch::Persistence::Model
-=======
 require 'elasticsearch/model'
 require 'elasticsearch/persistence'
 require 'elasticsearch/dsl'
@@ -9,7 +5,6 @@ require 'elasticsearch/dsl'
 class Category
   include Elasticsearch::Persistence::Repository
   include Elasticsearch::Persistence::Repository::DSL
->>>>>>> Stashed changes
   include Kkuleomi::Store::Model
 
   index_name "categories-#{Rails.env}"
@@ -47,9 +42,3 @@ class Category
     name
   end
 end
-<<<<<<< Updated upstream
-=======
-
-repository = Elasticsearch::Persistence::Repository.new
-repository.save Category.new(title: 'Category')
->>>>>>> Stashed changes
