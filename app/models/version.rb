@@ -1,10 +1,23 @@
+require 'elasticsearch/persistence'
+require 'elasticsearch/model'
+require 'virtus'
+
 class Version
-  include Elasticsearch::Persistence::Model
+  include Virtus::Model
+  # IMPORTANT (antonette)
+  # Persistence and Model has been separated
+  # Repository is the new feature
+  include Elasticsearch::Model
+  include Elasticsearch::Persistence
   include Kkuleomi::Store::Model
   include Kkuleomi::Store::Models::VersionImport
 
+  # IMPORTANT (antonette)
+  # require elasticsearch model
   index_name "versions-#{Rails.env}"
 
+  # IMPORTANT (antonette)
+  # features from virtus
   attribute :version,       String,  mapping: { type: 'keyword' }
   attribute :package,       String,  mapping: { type: 'keyword' }
   attribute :atom,          String,  mapping: { type: 'keyword' }

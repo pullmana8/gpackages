@@ -1,9 +1,22 @@
+require 'elasticsearch/persistence'
+require 'elasticsearch/model'
+require 'virtus'
+
 class Useflag
-  include Elasticsearch::Persistence::Model
+  include Virtus::Model
+  # IMPORTANT (antonette)
+  # Persistence and Model has been separated
+  # Repository is the new feature
+  include Elasticsearch::Model
+  include Elasticsearch::Persistence
   include Kkuleomi::Store::Model
 
+  # IMPORTANT (antonette)
+  # require elasticsearch model
   index_name "useflags-#{Rails.env}"
 
+  # IMPORTANT (antonette)
+  # features from virtus
   attribute :name,              String, mapping: { type: 'keyword' }
   attribute :description,       String, mapping: { type: 'text' }
   attribute :atom,              String, mapping: { type: 'keyword' }

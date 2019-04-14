@@ -1,15 +1,28 @@
+require 'elasticsearch/persistence'
+require 'elasticsearch/model'
+require 'virtus'
+
 class Package
-  include Elasticsearch::Persistence::Model
+  include Virtus::Model
+  # IMPORTANT (antonette)
+  # Persistence and Model has been separated
+  # Repository is the new feature
+  include Elasticsearch::Model
+  include Elasticsearch::Persistence
   include Kkuleomi::Store::Model
   include Kkuleomi::Store::Models::PackageImport
   include Kkuleomi::Store::Models::PackageSearch
 
+  # IMPORTANT (antonette)
+  # require elasticsearch model
   index_name "packages-#{Rails.env}"
 
   raw_fields = {
 		type: 'keyword'
 	}
 
+  # IMPORTANT (antonette)
+  # features from virtus
   attribute :category,        String, mapping: raw_fields
   attribute :name,            String, mapping: raw_fields
   attribute :name_sort,       String, mapping: raw_fields
