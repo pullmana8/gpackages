@@ -1,17 +1,7 @@
-FROM gentoo/portage:latest as portage
-FROM gentoo/stage3-amd64
-
-# Need a portage tree to build, use last nights.
-COPY --from=portage /usr/portage /usr/portage
-# Sandbox doesn't work well in docker.
-
-ENV FEATURES="-userpriv -usersandbox -sandbox"
-ENV USE="-bindist"
-
-RUN emerge -C openssh
-RUN emerge net-libs/nodejs
-# Bundler is how we install the ruby stuff.
-RUN emerge dev-ruby/bundler
+# IMPORTANT (antonette)
+# I created a Docker image for the first part of the image
+# TODO: create Docker image for ES
+FROM pyrrhus/gpkg
 
 # Needed for changelogs.
 RUN git clone https://anongit.gentoo.org/git/repo/gentoo.git /mnt/packages-tree/gentoo/
