@@ -34,8 +34,8 @@ end
 def run_update(no_change_objects)
   initialize_caches
 
-  fail 'Invalid work dir!' unless File.directory? KKULEOMI_PORTDIR
-  repo = Portage::Repository::Model.new KKULEOMI_PORTDIR
+  fail 'Invalid work dir!' unless File.directory?('/usr/portage')
+  repo = Portage::Repository::Model.new('/usr/portage')
 
   options = {
     suppress_change_objects: no_change_objects
