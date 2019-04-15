@@ -47,15 +47,6 @@ module Kkuleomi::Store::Model
       ))
     end
 
-    # Returns all (by default 10k) records of this class sorted by a field.
-    def all_sorted_by(field, order, options = {})
-      all({
-            query: { match_all: {} },
-            sort: { field => { order: order } }
-          }, options)
-    end
-  end
-
   module InstanceMethods
     # Converts the model to an OpenStruct instance
     #

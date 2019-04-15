@@ -3,21 +3,13 @@ class Kkuleomi::Store::Suggester
     @q = q
   end
 
-  def response
-    @response ||= begin
-      Elasticsearch::Persistence.client.suggest(
-          index: "packages-#{Rails.env}",
-          body: {
-              name: {
-                  text: @q,
-                  completion: { field: 'suggest_name', size: 25 }
-              },
-              description: {
-                  text: @q,
-                  completion: { field: 'suggest_description', size: 25 }
-              }
-          }
-      )
+  def execute!(*repositories)
+    @response ||= []
+    repositories.each do |respository|
+      @response << begin
+        repository.client.suggest(index: repository.index_name,
+          body: repository.suggest_body(@term))
+      end
     end
   end
 end

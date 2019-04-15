@@ -81,10 +81,12 @@ GEM
       multi_json
     equalizer (0.0.11)
     erubis (2.7.0)
+    eventmachine (1.2.7)
     eventmachine (1.2.7-x64-mingw32)
     execjs (2.7.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
+    ffi (1.10.0)
     ffi (1.10.0-x64-mingw32)
     git (1.5.0)
     globalid (0.4.2)
@@ -111,6 +113,8 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
+    nokogiri (1.10.2)
+      mini_portile2 (~> 2.4.0)
     nokogiri (1.10.2-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     octicons (8.5.0)
@@ -214,6 +218,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES

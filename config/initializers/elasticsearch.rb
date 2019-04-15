@@ -1,9 +1,13 @@
 require 'elasticsearch/persistence'
 
-client = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL'] || 'localhost:9200'
+DEFAULT_CLIENT = Elasticsearch::Client.new host: ENV['ELASTICSEARCH_URL'] || 'localhost:9200'
+$category = CategoryRepository.new(client: DEFAULT_CLIENT)
+$package = PackageRepository.new(client: DEFAULT_CLIENT)
+$change = Change.new(client: DEFAULT_CLIENT)
+
 if Rails.env.development? or ENV['RAILS_DEBUG']
   logger           = ActiveSupport::Logger.new(STDERR)
-  logger.level     = Logger::DEBUG
+  logger.level     = Logger::INFO
   logger.formatter = proc { |s, d, p, m| "\e[2m#{m}\n\e[0m" }
-#  Elasticsearch::Persistence.client.transport.logger = logger
+  DEFAULT_CLIENT.transport.logger = logger
 end

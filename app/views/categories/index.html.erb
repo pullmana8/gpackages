@@ -14,7 +14,6 @@
       <div class="panel-body">
         <ul class="kk-col-list kk-4col-list kk-category-listing">
         <%- prev_letter = 'z' -%>
-        <% @categories.each do |category| %>
           <%- unless category.name[0].upcase == prev_letter ; prev_letter = category.name[0].upcase -%>
           <li class="kk-col-list-header"><span class="kk-group-header"><%= prev_letter %></span></li>
           <%- end -%>

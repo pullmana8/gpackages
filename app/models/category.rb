@@ -1,25 +1,19 @@
-require 'elasticsearch/persistence'
-require 'elasticsearch/model'
-require 'virtus'
-
 class Category
-  include Virtus::Model
-  # IMPORTANT (antonette)
-  # Persistence and Model has been separated
-  # Repository is the new feature
-  include Elasticsearch::Model
-  include Elasticsearch::Persistence
+  include ActiveModel::Model
+  include ActiveModel::Validations
   include Kkuleomi::Store::Model
 
-  # IMPORTANT (antonette)
-  # require elasticsearch model
-  index_name "categories-#{Rails.env}"
+  ATTRIBUTES = [:name,
+  ]
 
-  # IMPORTANT (antonette)
-  # features from virtus
-  attribute :name,          String, mapping: { type: 'keyword' }
-  attribute :description,   String, mapping: { type: 'text' }
-  attribute :metadata_hash, String, mapping: { type: 'text' }
+  attr_accessor(*ATTRIBUTES)
+  attr_reader :attributes
+
+  def initialize(attr{})
+    attr.each do |k,v|
+      if ATTRIBUTES.include(k.to_sym)
+        send("#{k}=", v)
+
 
   # Determines if the document model needs an update from the repository model
   #

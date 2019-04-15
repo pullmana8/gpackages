@@ -28,8 +28,6 @@ gem 'rdiscount'
 # update versions to keep with dev-ruby/did_you_mean 1.1.2 version
 # [https://packages.gentoo.org/packages/dev-ruby/did_you_mean]
 gem 'did_you_mean', '~> 1.1', '>= 1.1.2'
-# Sidekiq bug?
-# gem 'did_you_mean', '1.0.2', require: false # Sidekiq missing dep
 
 gem 'octicons_helper'
 group :development do

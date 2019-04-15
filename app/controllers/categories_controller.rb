@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_nav
 
   def index
-    @categories = Category.all_sorted_by(:name, :asc)
+    @categories = $category
   end
 
   def show
