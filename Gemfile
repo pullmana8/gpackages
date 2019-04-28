@@ -37,9 +37,6 @@ gem 'sidekiq', require: false
 
 gem 'rdiscount'
 
-# Sidekiq bug?
-gem 'did_you_mean', '1.0.2', require: false # Sidekiq missing dep
-
 # UI
 gem 'octicons_helper'
 
