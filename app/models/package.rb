@@ -1,10 +1,12 @@
+require 'virtus'
+
 class Package
-  include Elasticsearch::Persistence::Model
+	include Virtus.model
   include Kkuleomi::Store::Model
   include Kkuleomi::Store::Models::PackageImport
   include Kkuleomi::Store::Models::PackageSearch
 
-  index_name "packages-#{Rails.env}"
+  # index_name "packages-#{Rails.env}"
 
   raw_fields = {
 		type: 'keyword'
