@@ -1,6 +1,9 @@
 require 'digest'
-class Portage::Repository::Package
-  attr_reader :category, :name, :path
+require 'elasticsearch/persistence'
+
+class PortageRepository::Package
+  include Elasticsearch::Persistence::Repository
+  # attr_reader :category, :name, :path
 
   # Creates a new Package model
   #
