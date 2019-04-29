@@ -1,8 +1,10 @@
+require 'virtus'
+
 class Change
-  include Elasticsearch::Persistence::Model
+  include Virtus.model
   include Kkuleomi::Store::Model
 
-  index_name "change-#{Rails.env}"
+  # index_name "change-#{Rails.env}"
 
   attribute :package,     String, mapping: { type: 'keyword' }
   attribute :category,    String, mapping: { type: 'keyword' }
