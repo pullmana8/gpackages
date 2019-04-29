@@ -24,11 +24,6 @@ gem 'sidekiq'
 
 gem 'rdiscount'
 
-# IMPORTANT (antonette)
-# update versions to keep with dev-ruby/did_you_mean 1.1.2 version
-# [https://packages.gentoo.org/packages/dev-ruby/did_you_mean]
-gem 'did_you_mean', '~> 1.1', '>= 1.1.2'
-
 gem 'octicons_helper'
 group :development do
   gem 'byebug'
