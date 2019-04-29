@@ -1,6 +1,9 @@
 require 'digest'
-class Portage::Repository::Ebuild
-  attr_reader :package, :name, :path, :version, :category, :repo_root
+require 'elasticsearch/persistence'
+
+# rename Portage::Repository to PortageRepository
+class PortageRepository::Ebuild
+ # attr_reader :package, :name, :path, :version, :category, :repo_root
 
   # Creates a new ebuild model instance
   #
