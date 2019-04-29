@@ -1,6 +1,10 @@
+require 'elasticsearch/persistence'
+
 # Describes a portage repository identified by its base path
-class Portage::Repository::Model
-  attr_reader :repo_name, :path
+class PortageRepository::Model
+  include Elasticsearch::Persistence::Repository
+  
+  # attr_reader :repo_name, :path
 
   def initialize(path)
     @path = path
