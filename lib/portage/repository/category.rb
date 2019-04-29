@@ -4,7 +4,7 @@ require 'elasticsearch/persistence'
 class PortageRepository::Category
   include Elasticsearch::Persistence::Repository
   
-  attr_reader :name, :path
+  # attr_reader :name, :path
 
   # Creates a new Category model
   #
