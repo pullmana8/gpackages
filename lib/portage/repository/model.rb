@@ -15,7 +15,7 @@ class PortageRepository::Model
   #
   # @return [Array[Portage::Repository::Category]] List of categories
   def categories
-    @categories ||= category_dirs.map {|c| Portage::Repository::Category.new(File.join(@path, c)) }
+    @categories ||= category_dirs.map {|c| PortageRepository::Category.new(File.join(@path, c)) }
   end
 
   # Returns a given category, or nil
