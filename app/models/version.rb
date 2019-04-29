@@ -1,9 +1,11 @@
+require 'virtus'
+
 class Version
-  include Elasticsearch::Persistence::Model
+  include Virtus.model
   include Kkuleomi::Store::Model
   include Kkuleomi::Store::Models::VersionImport
 
-  index_name "versions-#{Rails.env}"
+ # index_name "versions-#{Rails.env}"
 
   attribute :version,       String,  mapping: { type: 'keyword' }
   attribute :package,       String,  mapping: { type: 'keyword' }
