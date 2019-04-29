@@ -1,8 +1,10 @@
+require 'virtus'
+
 class Useflag
-  include Elasticsearch::Persistence::Model
+  include Virtus.model
   include Kkuleomi::Store::Model
 
-  index_name "useflags-#{Rails.env}"
+  # index_name "useflags-#{Rails.env}"
 
   attribute :name,              String, mapping: { type: 'keyword' }
   attribute :description,       String, mapping: { type: 'text' }
