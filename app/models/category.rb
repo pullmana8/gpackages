@@ -1,13 +1,10 @@
-require 'elasticsearch/model'
-require 'elasticsearch/persistence'
-require 'elasticsearch/dsl'
+require 'virtus'
 
 class Category
-  include Elasticsearch::Persistence::Repository
-  include Elasticsearch::Persistence::Repository::DSL
+  include Virtus.model
   include Kkuleomi::Store::Model
-
-  index_name "categories-#{Rails.env}"
+  
+  # index_name "categories-#{Rails.env}"
 
   attribute :name,          String, mapping: { type: 'keyword' }
   attribute :description,   String, mapping: { type: 'text' }
