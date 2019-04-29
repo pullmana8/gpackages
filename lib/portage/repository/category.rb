@@ -1,7 +1,7 @@
 require 'digest'
 require 'elasticsearch/persistence'
 
-class Portage::Repository::Category
+class PortageRepository::Category
   include Elasticsearch::Persistence::Repository
   
   attr_reader :name, :path
