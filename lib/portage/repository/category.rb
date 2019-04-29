@@ -1,5 +1,9 @@
 require 'digest'
+require 'elasticsearch/persistence'
+
 class Portage::Repository::Category
+  include Elasticsearch::Persistence::Repository
+  
   attr_reader :name, :path
 
   # Creates a new Category model
@@ -35,8 +39,7 @@ class Portage::Repository::Category
   def packages
     @packages ||= package_dirs.map {|p| Portage::Repository::Package.new(p) }
   end
-
-
+  
   # Returns a given package, or nil
   #
   # TODO: Hash categories internally?
@@ -47,7 +50,6 @@ class Portage::Repository::Category
 
     nil
   end
-
 
   # Returns the hash of the metadata for this category
   #
