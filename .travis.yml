@@ -26,4 +26,7 @@ before_script:
   - cp config/secrets.yml.dist config/secrets.yml
   # Wait for Elasticsearch
   - sleep 10
+
+script:
+  - bundle exec rubocop
   - bundle exec rake kkuleomi:index:init RAILS_ENV=test
