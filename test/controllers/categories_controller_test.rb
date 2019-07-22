@@ -8,7 +8,7 @@ class CategoriesControllerTest < ActionController::TestCase
   end
 
   test "should show category" do
-    get :show, id: 'virtual'
+    get :show, params: { id: 'virtual' }
     assert_response :success
   end
 end
