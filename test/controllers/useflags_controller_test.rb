@@ -7,12 +7,12 @@ class UseflagsControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show
+    get :show, id: 'test'
     assert_response :success
   end
 
   test "should get search" do
-    get :search
+    get :search, q: 'test'
     assert_response :success
   end
 
