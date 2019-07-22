@@ -30,7 +30,6 @@ gem 'nokogiri'
 gem 'git'
 gem 'thin'
 
-gem 'sinatra', require: false
 gem 'sidekiq', require: false
 
 gem 'rdiscount'
