@@ -11,10 +11,4 @@ class CategoriesControllerTest < ActionController::TestCase
     get :show, id: 'virtual'
     assert_response :success
   end
-
-  test "should search category" do
-    get :search, id: 'virtual'
-    assert_response :success
-  end
-
 end
