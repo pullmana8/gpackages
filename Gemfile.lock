@@ -111,7 +111,6 @@ GEM
     octicons_helper (9.1.1)
       octicons (= 9.1.1)
       rails
-    parallel (1.17.0)
     rack (1.6.11)
     rack-protection (1.5.5)
       rack
@@ -217,7 +216,6 @@ DEPENDENCIES
   jquery-rails
   nokogiri
   octicons_helper
-  parallel
   rails (= 4.2.11.1)
   rdiscount
   ruby-progressbar
