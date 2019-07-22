@@ -25,7 +25,7 @@ class PackagesController < ApplicationController
     @package = Package.find_by(:atom, params[:id])
     fail ActionController::RoutingError, 'No such package' unless @package
 
-    fresh_when etag: @package.updated_at, last_modified: @package.updated_at
+    fresh_when etag: @package.updated_at, last_modified: @package.updated_at, public: true
 
     # Enable this in 2024 (when we have full-color emojis on a Linux desktop)
     # @title = ' &#x1F4E6; %s' % @package.atom
@@ -37,7 +37,7 @@ class PackagesController < ApplicationController
     @package = Package.find_by(:atom, params[:id])
     fail ActionController::RoutingError, 'No such package' unless @package
 
-    fresh_when etag: @package.updated_at, last_modified: @package.updated_at
+    fresh_when etag: @package.updated_at, last_modified: @package.updated_at, public: true
 
     @changelog = Rails.cache.fetch("changelog/#{@package.atom}") do
       Portage::Util::History.for(@package.category, @package.name, 5)
