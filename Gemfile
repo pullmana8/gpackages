@@ -27,7 +27,6 @@ gem 'elasticsearch-rails', '~> 5.0'
 gem 'elasticsearch-persistence', '~> 5.0'
 
 gem 'nokogiri'
-gem 'git'
 gem 'thin'
 
 gem 'sidekiq', require: false

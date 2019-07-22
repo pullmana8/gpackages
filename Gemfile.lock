@@ -80,7 +80,6 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
-    git (1.5.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
@@ -206,7 +205,6 @@ DEPENDENCIES
   byebug
   elasticsearch-persistence (~> 5.0)
   elasticsearch-rails (~> 5.0)
-  git
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri
