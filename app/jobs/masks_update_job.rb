@@ -1,4 +1,4 @@
-class MasksUpdateJob < ActiveJob::Base
+class MasksUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(*_args)
