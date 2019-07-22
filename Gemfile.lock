@@ -147,7 +147,6 @@ GEM
     rdiscount (2.2.0.1)
     rdoc (4.3.0)
     redis (4.1.2)
-    ruby-progressbar (1.10.1)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -218,7 +217,6 @@ DEPENDENCIES
   octicons_helper
   rails (= 4.2.11.1)
   rdiscount
-  ruby-progressbar
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq
