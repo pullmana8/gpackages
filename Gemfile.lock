@@ -204,7 +204,7 @@ DEPENDENCIES
   elasticsearch-persistence (~> 5.0)
   elasticsearch-rails (~> 5.0)
   jbuilder (~> 2.0)
-  jquery-rails
+  jquery-rails (~> 4.3.5)
   nokogiri
   octicons_helper
   rails (= 4.2.11.1)
