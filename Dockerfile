@@ -2,7 +2,7 @@ FROM gentoo/portage:latest as portage
 FROM gentoo/stage3-amd64
 
 # Need a portage tree to build, use last nights.
-COPY --from=portage /usr/portage /usr/portage
+COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 # Sandbox doesn't work well in docker.
 
 ENV FEATURES="-userpriv -usersandbox -sandbox"
