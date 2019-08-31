@@ -26,5 +26,5 @@ RUN cp /var/www/packages.gentoo.org/htdocs/config/secrets.yml.dist /var/www/pack
 RUN sed -i 's/set_me/ENV["SECRET_KEY_BASE"]/'g /var/www/packages.gentoo.org/htdocs/config/secrets.yml
 
 # Precompile our assets.
-RUN rake assets:precompile
+RUN bundle exec rake assets:precompile
 CMD ["bundler", "exec", "thin", "start"]
