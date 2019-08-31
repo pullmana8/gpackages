@@ -1,8 +1,8 @@
 # The location of the repository used for the indexer
-KKULEOMI_PORTDIR='/usr/portage'
+KKULEOMI_PORTDIR='/var/db/repos/gentoo'
 
 # The location of the repository used for gathering runtime information
-KKULEOMI_RUNTIME_PORTDIR='/usr/portage'
+KKULEOMI_RUNTIME_PORTDIR='/var/db/repos/gentoo'
 
 # The first actual git commit
 # Set this to the second commit in the repo to avoid long changelog generation times
