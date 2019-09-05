@@ -1,15 +1,12 @@
 module Kkuleomi::Store
-  def self.refresh_index
-    Category.gateway.refresh_index!
-  end
 
   def self.create_index(force = false)
-		types = [
-			Category,
-			Package,
-			Version,
-			Change,
-			Useflag,
+		repositories = [
+			CategoryRepository,
+			PackageRepository,
+			VersionRepository,
+			ChangeRepository,
+			UseflagRepository,
 		]
 
     base_settings = {
@@ -33,15 +30,11 @@ module Kkuleomi::Store
 				mapping: { total_fields: { limit: 50000 } }
     }
 
+		settings = JSON.parse('{ "mapping": { "total_fields": { "limit": 50000 } } }')
+
 		# In ES 1.5, we could use 1 mega-index. But in ES6, each model needs its own.
-		types.each { |type|
-						client = type.gateway.client
-						client.indices.delete(index: type.index_name) rescue nil if force
-						body = {
-							settings: type.settings.to_hash.merge(base_settings),
-						 	mappings: type.mappings.to_hash
-						}
-						client.indices.create(index: type.index_name, body: body)
+		repositories.each { |repository|
+						repository.instance.create_index!(force: true, settings: settings)
 		}
   end
 end

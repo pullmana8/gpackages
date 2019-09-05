@@ -30,15 +30,15 @@ module Kkuleomi::Store::Models::PackageImport
       set_basic_metadata(package_model, latest_ebuild)
 
       # Be sure to have an ID now
-      save
+      PackageRepository.save(self)
 
       import_useflags!(package_model)
-      Kkuleomi::Store.refresh_index
+      CategoryRepository.refresh_index!
       import_versions!(package_model, ebuilds, options)
 
       # Do this last, so that any exceptions before this point skip this step
       self.metadata_hash = package_model.metadata_hash
-      save
+      PackageRepository.save(self)
 
       if options[:package_state] == 'new' && !options[:suppress_change_objects]
         RecordChangeJob.perform_later(
@@ -73,7 +73,7 @@ module Kkuleomi::Store::Models::PackageImport
     end
 
     def import_useflags!(package_model)
-      index_flags = Useflag.local_for(package_model.to_cp)
+      index_flags = UseflagRepository.local_for(package_model.to_cp)
       model_flags = package_model.metadata[:use]
 
       new_flags = model_flags.keys - index_flags.keys
@@ -87,23 +87,23 @@ module Kkuleomi::Store::Models::PackageImport
         flag_doc.description = model_flags[flag]
         flag_doc.atom = package_model.to_cp
         flag_doc.scope = 'local'
-        flag_doc.save
+        UseflagRepository.save(flag_doc)
       end
 
       eql_flags.each do |flag|
         unless index_flags[flag].description == model_flags[flag]
           index_flags[flag].description = model_flags[flag]
-          index_flags[flag].save
+          UseflagRepository.save(index_flags[flag])
         end
       end
 
       del_flags.each do |flag|
-        index_flags[flag].delete
+        UseflagRepository.delete(index_flags[flag])
       end
     end
 
     def import_versions!(package_model, ebuilds, options)
-      index_v = Hash[Version.find_all_by(:package, package_model.to_cp).map { |v| [v.version, v] }]
+      index_v = Hash[VersionRepository.find_all_by(:package, package_model.to_cp).map { |v| [v.version, v] }]
       model_v = Hash[ebuilds.map { |v| [v.version, v] }]
 
       index_keys = index_v.keys
@@ -128,7 +128,7 @@ module Kkuleomi::Store::Models::PackageImport
 
         if sort_key == 0
           self.useflags = version_doc.useflags
-          save
+          VersionRepository.save(version_doc)
         end
       end
 
@@ -144,12 +144,12 @@ module Kkuleomi::Store::Models::PackageImport
 
         if sort_key == 0
           self.useflags = version_doc.useflags
-          save
+          VersionRepository.save(version_doc)
         end
       end
 
       del_v.each do |v|
-        index_v[v].delete
+        VersionRepository.delete(index_v[v])
       end
     end
   end

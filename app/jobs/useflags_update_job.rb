@@ -10,7 +10,7 @@ class UseflagsUpdateJob < ApplicationJob
 
   def update_global(repo)
     model_flags = repo.global_useflags
-    index_flags = Useflag.global
+    index_flags = UseflagRepository.global
 
     new_flags = model_flags.keys - index_flags.keys
     del_flags = index_flags.keys - model_flags.keys
@@ -21,24 +21,24 @@ class UseflagsUpdateJob < ApplicationJob
       flag_doc.name = flag
       flag_doc.description = model_flags[flag]
       flag_doc.scope = 'global'
-      flag_doc.save
+      UseflagRepository.save(flag_doc)
     end
 
     eql_flags.each do |flag|
       unless index_flags[flag].description == model_flags[flag]
         index_flags[flag].description = model_flags[flag]
-        index_flags[flag].save
+        UseflagRepository.save(index_flags[flag])
       end
     end
 
     del_flags.each do |flag|
-      index_flags[flag].delete
+      UseflagRepository.delete(index_flags[flag])
     end
   end
 
   def update_use_expand(repo)
     model_flags = repo.use_expand_flags
-    index_flags = Useflag.use_expand
+    index_flags = UseflagRepository.use_expand
 
     # Calculate keys only once
     index_flag_keys = index_flags.keys
@@ -55,7 +55,7 @@ class UseflagsUpdateJob < ApplicationJob
         if index_flag_keys.include? _flag
           unless index_flags[_flag].description == desc
             index_flags[_flag].description = desc
-            index_flags[_flag].save
+            UseflagRepository.save(index_flags[_flag])
           end
         else
           # New flag
@@ -64,14 +64,14 @@ class UseflagsUpdateJob < ApplicationJob
           flag_doc.description = desc
           flag_doc.scope = 'use_expand'
           flag_doc.use_expand_prefix = variable
-          flag_doc.save
+          UseflagRepository.save(flag_doc)
         end
       end
     end
 
     # Find and process removed flags
     flag_status.each_pair do |flag, status|
-      index_flags[flag].delete unless status
+      UseflagRepository.delete(index_flags[flag]) unless status
     end
   end
 

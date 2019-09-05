@@ -1,31 +1,52 @@
 class Package
-  include Elasticsearch::Persistence::Model
-  include Kkuleomi::Store::Model
+  include ActiveModel::Model
+  include ActiveModel::Validations
   include Kkuleomi::Store::Models::PackageImport
-  include Kkuleomi::Store::Models::PackageSearch
 
-  index_name "packages-#{Rails.env}"
+  ATTRIBUTES = [:id,
+                :created_at,
+                :updated_at,
+                :category,
+                :name,
+                :name_sort,
+                :atom,
+                :description,
+                :longdescription,
+                :homepage,
+                :license,
+                :licenses,
+                :herds,
+                :maintainers,
+                :useflags,
+                :metadata_hash]
+  attr_accessor(*ATTRIBUTES)
+  attr_reader :attributes
 
-  raw_fields = {
-		type: 'keyword'
-	}
+  validates :name, presence: true
 
-  attribute :category,        String, mapping: raw_fields
-  attribute :name,            String, mapping: raw_fields
-  attribute :name_sort,       String, mapping: raw_fields
-  attribute :atom,            String, mapping: raw_fields
-  attribute :description,     String, mapping: { type: 'text' }
-  attribute :longdescription, String, mapping: { type: 'text' }
-  attribute :homepage,        String, default: [], mapping: raw_fields
-  attribute :license,         String, mapping: raw_fields
-  attribute :licenses,        String, default: [], mapping: raw_fields
-  attribute :herds,           String, default: [], mapping: raw_fields
-  attribute :maintainers,     Array,  default: [], mapping: { type: 'object' }
-  attribute :useflags,        Hash,   default: {}, mapping: { type: 'object' }
-  attribute :metadata_hash,   String, mapping: raw_fields
+  def initialize(attr={})
+    attr.each do |k,v|
+      if ATTRIBUTES.include?(k.to_sym)
+        send("#{k}=", v)
+      end
+    end
+  end
+
+  def attributes
+    @id = @atom
+    @created_at ||= DateTime.now
+    @updated_at = DateTime.now
+    ATTRIBUTES.inject({}) do |hash, attr|
+      if value = send(attr)
+        hash[attr] = value
+      end
+      hash
+    end
+  end
+  alias :to_hash :attributes
 
   def category_model
-    @category_model ||= Category.find_by(:name, category)
+    @category_model ||= CategoryRepository.find_by(:name, category)
   end
 
   def to_param
@@ -44,7 +65,7 @@ class Package
   end
 
   def versions
-    @versions ||= Version.find_all_by(:package, atom, sort: { sort_key: { order: 'asc' } })
+    @versions ||= VersionRepository.find_all_by(:package, atom, sort: { sort_key: { order: 'asc' } })
   end
 
   def latest_version
@@ -63,6 +84,15 @@ class Package
   def needs_maintainer?
     (maintainers.size == 1 && maintainers.first['email'] == 'maintainer-needed@gentoo.org') ||
       maintainers.empty? && herds.empty?
+  end
+
+  # Converts the model to an OpenStruct instance
+  #
+  # @param [Array<Symbol>] fields Fields to export into the OpenStruct, or all fields if nil
+  # @return [OpenStruct] OpenStruct containing the selected fields
+  def to_os(*fields)
+    fields = all_fields if fields.empty?
+    OpenStruct.new(Hash[fields.map { |field| [field, send(field)] }])
   end
 
   private

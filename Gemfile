@@ -23,8 +23,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 1.0', group: :doc
 
 # packages stuff
-gem 'elasticsearch-rails', '~> 5.0'
-gem 'elasticsearch-persistence', '~> 5.0'
+gem 'elasticsearch-rails', '~> 7.0.0'
+gem 'elasticsearch-persistence', '~> 7.0.0'
 
 gem 'nokogiri'
 gem 'thin'

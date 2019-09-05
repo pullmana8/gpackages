@@ -3,7 +3,7 @@
     <h3 class="panel-title"><%= t :box_metadata %></h3>
   </div>
   <ul class="list-group kk-metadata-list">
-  <% if package.homepage.size > 1 %>
+  <% if !package.homepage.nil? && package.homepage.size > 1 %>
     <li class="kk-metadata-item list-group-item">
       <div class="row">
         <div class="col-xs-12 col-md-3 kk-metadata-key">

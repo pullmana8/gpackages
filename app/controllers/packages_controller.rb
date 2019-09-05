@@ -8,24 +8,24 @@ class PackagesController < ApplicationController
 
   def search
     @offset = params[:o].to_i || 0
-    @packages = Package.default_search(params[:q], @offset)
+    @packages = PackageRepository.default_search(params[:q], @offset)
 
     redirect_to package_path(@packages.first).gsub('%2F', '/') if @packages.size == 1
   end
 
   def suggest
-    @packages = Package.suggest(params[:q])
+    @packages = PackageRepository.suggest(params[:q])
   end
 
   def resolve
-    @packages = Package.resolve(params[:atom])
+    @packages = PackageRepository.resolve(params[:atom])
   end
 
   def show
-    @package = Package.find_by(:atom, params[:id])
+    @package = PackageRepository.find_by(:atom, params[:id])
     fail ActionController::RoutingError, 'No such package' unless @package
 
-    fresh_when etag: @package.updated_at, last_modified: @package.updated_at, public: true
+    fresh_when etag: Time.parse(@package.updated_at), last_modified: Time.parse(@package.updated_at), public: true
 
     # Enable this in 2024 (when we have full-color emojis on a Linux desktop)
     # @title = ' &#x1F4E6; %s' % @package.atom
@@ -34,10 +34,10 @@ class PackagesController < ApplicationController
   end
 
   def changelog
-    @package = Package.find_by(:atom, params[:id])
+    @package = PackageRepository.find_by(:atom, params[:id])
     fail ActionController::RoutingError, 'No such package' unless @package
 
-    if stale?(etag: @package.updated_at, last_modified: @package.updated_at, public: true)
+    if stale?(etag: Time.parse(@package.updated_at), last_modified: Time.parse(@package.updated_at), public: true)
       @changelog = Rails.cache.fetch("changelog/#{@package.atom}") do
         Portage::Util::History.for(@package.category, @package.name, 5)
       end

@@ -43,9 +43,9 @@ class ArchesController < ApplicationController
 
   def keyworded_packages(arch)
     Rails.cache.fetch("keyworded_packages/#{arch}", expires_in: 10.minutes) do
-      Change.filter_all({ change_type: 'keyword', arches: arch },
-                        size: 50,
-                        sort: { created_at: { order: 'desc' } }).map do |change|
+      ChangeRepository.filter_all({ change_type: 'keyword', arches: arch },
+                                  size: 50,
+                                  sort: { created_at: { order: 'desc' } }).map do |change|
         change.to_os(:change_type, :package, :category, :version, :arches, :created_at)
       end
     end
@@ -53,9 +53,9 @@ class ArchesController < ApplicationController
 
   def stabled_packages(arch)
     Rails.cache.fetch("stabled_packages/#{arch}", expires_in: 10.minutes) do
-      Change.filter_all({ change_type: 'stable', arches: arch },
-                        size: 50,
-                        sort: { created_at: { order: 'desc' } }).map do |change|
+      ChangeRepository.filter_all({ change_type: 'stable', arches: arch },
+                                  size: 50,
+                                  sort: { created_at: { order: 'desc' } }).map do |change|
         change.to_os(:change_type, :package, :category, :version, :arches, :created_at)
       end
     end

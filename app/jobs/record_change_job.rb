@@ -25,6 +25,6 @@ class RecordChangeJob < ApplicationJob
       c.change_type = 'removal'
     end
 
-    c.save
+    ChangeRepository.save(c)
   end
 end

@@ -3,15 +3,15 @@ class CategoriesController < ApplicationController
   before_action :set_nav
 
   def index
-    @categories = Category.all_sorted_by(:name, :asc)
+    @categories = CategoryRepository.all_sorted_by(:id, :asc)
   end
 
   def show
     @packages = Rails.cache.fetch("category/#{@category.name}/packages",
                                   expires_in: 10.minutes) do
-      Package.find_all_by(:category,
-                          @category.name,
-                          sort: { name_sort: { order: 'asc' } }).map do |pkg|
+      PackageRepository.find_all_by(:category,
+                                    @category.name,
+                                    sort: { name_sort: { order: 'asc' } }).map do |pkg|
         pkg.to_os(:name, :atom, :description)
       end
     end
@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-    @category = Category.find_by(:name, params[:id])
+    @category = CategoryRepository.find_by(:name, params[:id])
     fail ActionController::RoutingError, 'No such category' unless @category
 
     @title = @category.name

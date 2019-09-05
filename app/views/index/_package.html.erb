@@ -1,4 +1,4 @@
-<%- package = Package.find_by(:atom, cp_to_atom(change.category, change.package)); unless package.nil? -%>
+<%- package = PackageRepository.find_by(:atom, cp_to_atom(change.category, change.package)); unless package.nil? -%>
 <tr>
   <td>
     <a href="<%= slf(package_path(cp_to_atom(change.category, change.package))) %>">

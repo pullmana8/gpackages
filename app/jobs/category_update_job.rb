@@ -5,8 +5,8 @@ class CategoryUpdateJob < ApplicationJob
     category_path, options = args
 
     model = Portage::Repository::Category.new(category_path)
-    category = Category.find_by(:name, model.name) || Category.new
-    idx_packages = Package.find_all_by(:category, model.name) || []
+    category = CategoryRepository.find_by(:name, model.name) || Category.new
+    idx_packages = PackageRepository.find_all_by(:category, model.name) || []
 
     if category.needs_import? model
       category.import! model

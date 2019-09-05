@@ -10,7 +10,7 @@ atom_feed(id: atom_id(@feed_type, @feed_id, 'feed')) do |feed|
 
   @changes.each do |change|
     atom = cp_to_atom change.category, change.package
-    package = Package.find_by :atom, atom
+    package = PackageRepository.find_by :atom, atom
     if package.nil?
       logger.warn "Package for change (#{change}) nil!"
       next
