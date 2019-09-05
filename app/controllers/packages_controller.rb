@@ -39,7 +39,7 @@ class PackagesController < ApplicationController
 
     if stale?(etag: Time.parse(@package.updated_at), last_modified: Time.parse(@package.updated_at), public: true)
       @changelog = Rails.cache.fetch("changelog/#{@package.atom}") do
-        Portage::Util::History.for(@package.category, @package.name, 5)
+        CommitRepository.find_sorted_by('packages', @package.category + '/'+ @package.name, "date", "desc", 5)
       end
 
       respond_to do |wants|

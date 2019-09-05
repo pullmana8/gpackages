@@ -50,4 +50,5 @@ end
 def initialize_caches
   MasksUpdateJob.perform_later
   UseflagsUpdateJob.perform_later
+  CommitsUpdateJob.perform_later
 end

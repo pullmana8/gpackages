@@ -11,6 +11,7 @@ class BaseRepository
   class << self
     extend Forwardable
     def_delegators :instance, :find_all_by, :filter_all, :find_by, :find_all_by_parent, :all_sorted_by
+    def_delegators :instance, :find_sorted_by, :n_sorted_by
     def_delegators :instance, :count, :search, :delete, :save, :refresh_index!, :create_index
   end
 
@@ -56,6 +57,25 @@ class BaseRepository
                }
              })
      )
+  end
+
+  # Returns the given number of records of this class sorted by a field.
+  def find_sorted_by(field, value, sort_field, order, num_return, options = {})
+    search({
+               size: num_return,
+               query: { term: { field => value } },
+               sort: { sort_field => { order: order } }
+           }.merge(options))
+  end
+
+
+  # Returns n records of this class sorted by a field.
+  def n_sorted_by(n, field, order, options = {})
+    search({
+               size: n,
+               query: { match_all: {} },
+               sort: { field => { order: order } }
+           }.merge(options))
   end
 
   # Returns all (by default 10k) records of this class sorted by a field.

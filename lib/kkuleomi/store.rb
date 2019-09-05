@@ -7,6 +7,7 @@ module Kkuleomi::Store
 			VersionRepository,
 			ChangeRepository,
 			UseflagRepository,
+			CommitRepository
 		]
 
     base_settings = {

@@ -79,11 +79,11 @@ module PackagesHelper
   # Tries to find a matching changelog entry for a change object
   def matching_changelog_entry(change)
     changelog = Rails.cache.fetch("changelog/#{cp_to_atom(change.category, change.package)}", expires_in: 10.minutes) do
-      Portage::Util::History.for(change.category, change.package, 5)
+      CommitRepository.find_sorted_by('packages', change.category + '/' + change.package, "date", "desc", 5)
     end
 
     changelog.each do |changelog_entry|
-      if changelog_entry[:files][:added].include?('%s-%s.ebuild' % [change.package, change.version])
+      if changelog_entry.files["added"].include?('%s-%s.ebuild' % [change.package, change.version])
         return changelog_entry
       end
     end
