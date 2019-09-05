@@ -1,3 +1,7 @@
+#!/bin/bash
+
+emerge --sync
+
 if [[ ! -d /mnt/packages-tree/gentoo/ ]]; then
     cd /mnt/packages-tree || exit 1
     git clone https://anongit.gentoo.org/git/repo/gentoo.git
@@ -10,4 +14,4 @@ fi
 /var/www/packages.gentoo.org/htdocs/bin/update-use.sh
 
 cd /var/www/packages.gentoo.org/htdocs || exit 1
-bundle exec rake kkuleomi:update:all RAILS_ENV=production &>/dev/null
+bundle exec rake kkuleomi:update:all RAILS_ENV=${1:-development} &>/dev/null
