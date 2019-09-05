@@ -10,6 +10,7 @@ ENV USE="-bindist"
 
 RUN emerge -C openssh
 RUN emerge net-libs/nodejs
+RUN emerge sys-process/cronie
 # Bundler is how we install the ruby stuff.
 RUN mkdir -p /etc/portage/package.accept_keywords/
 RUN echo "=dev-ruby/bundler-1.17.3 ~amd64" >> /etc/portage/package.accept_keywords/bundler
