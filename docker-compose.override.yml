@@ -26,6 +26,12 @@ services:
       - type: "bind"
         source: "."
         target: "/var/www/packages.gentoo.org/htdocs/"
+      - type: volume
+        source: portage
+        target: /var/db/repos/gentoo
+      - type: volume
+        source: portage-git
+        target: /mnt/packages-tree
     environment:
       # "Redis:port" and "elasticsearch:port" refer to sibling containers.
       - REDIS_PROVIDER=REDIS_URL
@@ -48,6 +54,12 @@ services:
       - type: "bind"
         source: "."
         target: "/var/www/packages.gentoo.org/htdocs/"
+      - type: volume
+        source: portage
+        target: /var/db/repos/gentoo
+      - type: volume
+        source: portage-git
+        target: /mnt/packages-tree
     environment:
       - RAILS_ENV=development
       - RAILS_SERVE_STATIC_FILES=1
@@ -88,3 +100,6 @@ services:
       - '1358:1358'
     links:
       - elasticsearch
+volumes:
+  portage:
+  portage-git:
