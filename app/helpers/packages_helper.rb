@@ -83,7 +83,7 @@ module PackagesHelper
     end
 
     changelog.each do |changelog_entry|
-      if changelog_entry.files["added"].include?('%s-%s.ebuild' % [change.package, change.version])
+      if changelog_entry.files["added"].include?('%s/%s/%s-%s.ebuild' % [change.category, change.package, change.package, change.version])
         return changelog_entry
       end
     end
