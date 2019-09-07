@@ -14,3 +14,17 @@
  *= require jquery.typeahead.min
  *= require_self
  */
+
+/* Keep the footer at the bottom */
+body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    padding-bottom: 215px;
+}
+footer {
+    position: absolute;
+    margin-top: 40px;
+    bottom: 0;
+    width: 100%;
+}
