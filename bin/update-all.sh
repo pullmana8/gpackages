@@ -1,6 +1,8 @@
 #!/bin/bash
 
-emerge --sync
+if [[ ${1} != "production" ]];
+	emerge --sync
+fi
 
 if [[ ! -d /mnt/packages-tree/gentoo/ ]]; then
     cd /mnt/packages-tree || exit 1
