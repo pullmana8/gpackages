@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ${1} != "production" ]];
+if [[ ${1} != "production" ]]; then
 	emerge --sync
 fi
 
