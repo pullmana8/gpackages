@@ -1,9 +1,18 @@
 #!/bin/bash
 
-if [[ ${1} != "production" ]]; then
+# This script runs as the gpackages user normally!
+
+# Outside of a docker environment, it cannot call emerge --sync because that
+# requires the 'portage' group, and opens up attacks to escalate from gpackages
+# to portage-owned files.  However, in a Docker environment, the other files
+# from Portage are NOT available unless --sync IS used.
+
+# Stuff that we have to do inside Docker:
+if grep -qa docker /proc/1/cgroups && [[ ${1} != "production" ]]; then
 	emerge --sync
 fi
 
+# This is the copy of the tree used to run gpackages against.
 if [[ ! -d /mnt/packages-tree/gentoo/ ]]; then
     cd /mnt/packages-tree || exit 1
     git clone https://anongit.gentoo.org/git/repo/gentoo.git
