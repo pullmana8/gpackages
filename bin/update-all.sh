@@ -7,8 +7,13 @@
 # to portage-owned files.  However, in a Docker environment, the other files
 # from Portage are NOT available unless --sync IS used.
 
+function in_docker() {
+	path=/proc/1/cgroups
+	[[ -e ${path} ]] && grep -qa docker "${path}"
+}
+
 # Stuff that we have to do inside Docker:
-if [[ -e /proc/1/cgroups ]] && grep -qa docker /proc/1/cgroups && [[ ${1} != "production" ]]; then
+if in_docker && [[ ${1} != "production" ]]; then
 	emerge --sync
 fi
 
