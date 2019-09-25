@@ -8,7 +8,7 @@
 # from Portage are NOT available unless --sync IS used.
 
 # Stuff that we have to do inside Docker:
-if grep -qa docker /proc/1/cgroups && [[ ${1} != "production" ]]; then
+if [[ -e /proc/1/cgroups ]] && grep -qa docker /proc/1/cgroups && [[ ${1} != "production" ]]; then
 	emerge --sync
 fi
 
