@@ -1,4 +1,4 @@
-class CategoryUpdateJob < ActiveJob::Base
+class CategoryUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(*args)

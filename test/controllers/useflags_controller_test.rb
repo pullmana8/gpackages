@@ -7,12 +7,12 @@ class UseflagsControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show
+    get :show, params: { id: 'test' }
     assert_response :success
   end
 
   test "should get search" do
-    get :search
+    get :search, params: { q: 'test' }
     assert_response :success
   end
 

@@ -1,41 +1,57 @@
 source 'https://rubygems.org'
 
-# IMPORTANT (antonette)
-# Upgrade to 4.2 stable first before making upgrade to 5.2.3
-# Testing 5.2.3 on different branch, dirs/files are different
-gem 'rails', '4.2.11.1'
-gem 'sass-rails', '~> 5.0'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.2.3'
+# Use mysql as the database for Active Record
+# gem 'mysql2'
+# Use SCSS for stylesheets
+gem 'sassc-rails', '~> 2.0'
+# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
+# Use CoffeeScript for .coffee assets and views
+# gem 'coffee-rails', '~> 4.1.0'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails', '~> 4.3.5'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 1.0', group: :doc
+
+# packages stuff
+gem 'elasticsearch-rails', '~> 5.0'
+gem 'elasticsearch-persistence', '~> 5.0'
 
 gem 'nokogiri'
-gem 'parallel'
-gem 'ruby-progressbar'
-gem 'git'
 gem 'thin'
 
-# IMPORTANT (antonette)
-# Remove false
-gem 'sinatra'
-gem 'sidekiq'
+gem 'sidekiq', require: false
 
 gem 'rdiscount'
 
 gem 'octicons_helper'
 group :development do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
+
+  # Enable event-based autoloading
+  gem 'listen'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 3.0'
+
+  # Rubocop modules to help with consistent style and to avoid common
+  # issues.
+  gem 'rubocop', '0.73.0'
+  gem 'rubocop-performance', '1.4.0'
+  gem 'rubocop-rails', '2.2.1'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
 
-# IMPORTANT (antonette)
-# Tested earlier versions, and keeping ES on branch 6.x
-# ActiveModel feature is deprecated
-# Use Repository feature now
-gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '6.x'
-gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '6.x'
-gem 'elasticsearch-persistence', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '6.x'
-gem 'virtus'
+group :test do
+  gem 'rails-controller-testing'
+end

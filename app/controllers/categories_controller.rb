@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :search]
+  before_action :set_category, only: [:show]
   before_action :set_nav
 
   def index
@@ -19,9 +19,6 @@ class CategoriesController < ApplicationController
     @description = t(:desc_categories_show,
                      category: @category.name,
                      description: @category.description)
-  end
-
-  def search
   end
 
   private

@@ -13,11 +13,7 @@ Rails.application.routes.draw do
   # Catch all old pgo feeds
   get 'feed(/*stuff)', to: 'about#legacy', defaults: { format: 'atom' }
 
-  resources :categories, only: [:index, :show, :search] do
-    member do
-      get 'search'
-    end
-  end
+  resources :categories, only: %i[index show search]
 
   resources :packages, only: [:index, :show, :search], constraints: { id: /[^.]*/ } do
     collection do

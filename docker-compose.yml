@@ -1,5 +1,5 @@
 
-version: '2'
+version: '3.2'
 # p.g.o consists nominally of:
 # A service to sync the tree to $TREE_DIR && update the index.
 # The index updater simply submits work items into sidekiq.
@@ -11,6 +11,10 @@ version: '2'
 #  - Elasticsearch: runs the elasticsearch service.
 #  - Redis: Run Redis for Sidekiq.
 #  - Refresher: Syncs the package tree and pushes updates into sidekiq.
+#
+# For further information about usage during development / production
+# please refer to docker-compose.override.yml
+#
 services:
   http-serving:
     # Build from Dockerfile in .

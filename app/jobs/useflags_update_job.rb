@@ -1,4 +1,4 @@
-class UseflagsUpdateJob < ActiveJob::Base
+class UseflagsUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(*args)

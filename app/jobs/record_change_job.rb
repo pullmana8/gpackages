@@ -1,4 +1,4 @@
-class RecordChangeJob < ActiveJob::Base
+class RecordChangeJob < ApplicationJob
   queue_as :default
 
   # Creates a Change object for the given data

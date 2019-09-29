@@ -1,4 +1,4 @@
-class PackageUpdateJob < ActiveJob::Base
+class PackageUpdateJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
