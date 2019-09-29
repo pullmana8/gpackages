@@ -3,15 +3,15 @@
 <% if @packages.size > 0 %>
 <div class="panel panel-default">
   <div class="panel-heading">
-    Results <%= @offset + 1 %>—<%= [@offset + Package.default_search_size, @packages.total].min %> of <%= @packages.total %>
+    Results <%= @offset + 1 %>—<%= [@offset + PackageRepository.default_search_size, @packages.total].min %> of <%= @packages.total %>
   </div>
   <div class="list-group">
     <%= render partial: 'package_result_row', collection: @packages, as: 'package' %>
   </div>
   <div class="panel-footer">
     <div class="btn-group" role="group" aria-label="Result navigation">
-      <%= link_to '< Prev', search_packages_path(q: params[:q], o: [@offset - Package.default_search_size, 0].max), class: 'btn btn-default' + (@offset > 0 ? '' : ' disabled') %>
-      <%= link_to 'Next >', search_packages_path(q: params[:q], o: @offset + Package.default_search_size), class: 'btn btn-default ' + ((@offset + Package.default_search_size) > @packages.total ? 'disabled' : '') %>
+      <%= link_to '< Prev', search_packages_path(q: params[:q], o: [@offset - PackageRepository.default_search_size, 0].max), class: 'btn btn-default' + (@offset > 0 ? '' : ' disabled') %>
+      <%= link_to 'Next >', search_packages_path(q: params[:q], o: @offset + PackageRepository.default_search_size), class: 'btn btn-default ' + ((@offset + PackageRepository.default_search_size) > @packages.total ? 'disabled' : '') %>
     </div>
   </div>
 </div>

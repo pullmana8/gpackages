@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 module Packages
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 5.1
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -30,5 +30,9 @@ module Packages
     config.assets.precompile += %w(*.svg *.eot *.woff *.ttf *.css *.js)
 
     config.autoload_paths << Rails.root.join('lib')
+
+    config.active_job.queue_adapter = :sidekiq
+
+    config.middleware.use ActionDispatch::Flash
   end
 end

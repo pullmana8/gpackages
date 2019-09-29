@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h2 class="site-welcome stick-top">Welcome to the Home of <span class="text-primary"><%= number_with_delimiter Package.count %></span> Gentoo Packages</h2>
+  <h2 class="site-welcome stick-top">Welcome to the Home of <span class="text-primary"><%= number_with_delimiter PackageRepository.count %></span> Gentoo Packages</h2>
 
   <form action="<%= search_packages_path %>" method="get">
     <div class="typeahead-container">
@@ -43,7 +43,7 @@
   </div>
   <ul class="list-group">
     <% @version_bumps.each do |change|
-         _package = Package.find_by(:atom, cp_to_atom(change.category, change.package)) %>
+         _package = PackageRepository.find_by(:atom, cp_to_atom(change.category, change.package)) %>
       <%= render partial: 'packages/changed_package', object: change, as: 'change', locals: { package: _package, version: _package.version(change.version) } %>
     <% end %>
   </ul>

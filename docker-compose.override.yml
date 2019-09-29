@@ -1,0 +1,102 @@
+
+version: '3.2'
+# This file is used to override settings for development
+# purposes. In particular:
+#  - the source code will be mounted into the container for
+#    live reloading during the development
+#  - dejavu is used as gui for elasticsearch for debugging purposes
+#  - cors is enabled in elasticsearch for usage with dejavu
+#
+# These settings will automatically be used when executing:
+#  $ docker-compose up
+#
+# If you, however, don't want to use these settings (e.g. in production) use:
+#  $ docker-compose -f docker-compose.yml up
+#
+# Please refer to https://docs.docker.com/compose/extends/#multiple-compose-files
+# for further information.
+#
+services:
+  http-serving:
+    # Build from Dockerfile in .
+    build: .
+    ports:
+      - 5000
+    volumes:
+      - type: "bind"
+        source: "."
+        target: "/var/www/packages.gentoo.org/htdocs/"
+      - type: volume
+        source: portage
+        target: /var/db/repos/gentoo
+      - type: volume
+        source: portage-git
+        target: /mnt/packages-tree
+    environment:
+      # "Redis:port" and "elasticsearch:port" refer to sibling containers.
+      - REDIS_PROVIDER=REDIS_URL
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=elasticsearch:9200
+      - RAILS_SERVE_STATIC_FILES=1
+      - RAILS_ENV=development
+      - MEMCACHE_URL="memcache:11211"
+      - SECRET_KEY_BASE=6c9710aeb74dd88ff1d1b8f4bd6d7d8e0f340905d0974400fffd7246714aa703cf7bf4a98c0bc90317a3b803b82c0f9371e18ada19fc4eed9d6118077a249f50
+    depends_on:
+      - redis
+      - elasticsearch
+    command: bash -c "/var/www/packages.gentoo.org/htdocs/bin/first-run development"
+  sidekiq:
+    build: .
+    volumes:
+      - type: "bind"
+        source: "."
+        target: "/var/www/packages.gentoo.org/htdocs/"
+      - type: volume
+        source: portage
+        target: /var/db/repos/gentoo
+      - type: volume
+        source: portage-git
+        target: /mnt/packages-tree
+    environment:
+      - RAILS_ENV=development
+      - RAILS_SERVE_STATIC_FILES=1
+      - REDIS_URL=redis://redis:6379
+      - MEMCACHE_URL="memcache:11211"
+      - ELASTICSEARCH_URL=elasticsearch:9200
+      - SECRET_KEY_BASE=6c9710aeb74dd88ff1d1b8f4bd6d7d8e0f340905d0974400fffd7246714aa703cf7bf4a98c0bc90317a3b803b82c0f9371e18ada19fc4eed9d6118077a249f50
+    depends_on:
+      - redis
+      - elasticsearch
+    command: >
+      bash -c " bundler install
+      && bundle exec sidekiq -c 5"
+  memcache:
+    image: memcached:latest
+    ports:
+      - 11211
+  elasticsearch:
+    # TODO(antarus): We should build a docker image for this based on gentoo.
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - http.port=9200
+      - http.cors.enabled=true
+      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.cors.allow-credentials=true
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+    ports:
+      - 9200
+  # elasticsearch browser
+  dejavu:
+    image: appbaseio/dejavu:3.4.0
+    container_name: dejavu
+    ports:
+      - '1358:1358'
+    links:
+      - elasticsearch
+volumes:
+  portage:
+  portage-git:

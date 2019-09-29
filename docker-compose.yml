@@ -1,5 +1,5 @@
 
-version: '2'
+version: '3.2'
 # p.g.o consists nominally of:
 # A service to sync the tree to $TREE_DIR && update the index.
 # The index updater simply submits work items into sidekiq.
@@ -11,12 +11,23 @@ version: '2'
 #  - Elasticsearch: runs the elasticsearch service.
 #  - Redis: Run Redis for Sidekiq.
 #  - Refresher: Syncs the package tree and pushes updates into sidekiq.
+#
+# For further information about usage during development / production
+# please refer to docker-compose.override.yml
+#
 services:
   http-serving:
     # Build from Dockerfile in .
     build: .
     ports:
       - 5000
+    volumes:
+      - type: volume
+        source: portage
+        target: /var/db/repos/gentoo
+      - type: volume
+        source: portage-git
+        target: /mnt/packages-tree
     environment:
       # "Redis:port" and "elasticsearch:port" refer to sibling containers.
       - REDIS_PROVIDER=REDIS_URL
@@ -29,9 +40,16 @@ services:
     depends_on:
       - redis
       - elasticsearch
-    command: bundle exec thin start -p 5000
+    command: bash -c "/var/www/packages.gentoo.org/htdocs/bin/first-run production"
   sidekiq:
     build: .
+    volumes:
+      - type: volume
+        source: portage
+        target: /var/db/repos/gentoo
+      - type: volume
+        source: portage-git
+        target: /mnt/packages-tree
     environment:
       - RAILS_ENV=production
       - RAILS_SERVE_STATIC_FILES=1
@@ -49,7 +67,7 @@ services:
       - 11211
   elasticsearch:
     # TODO(antarus): We should build a docker image for this based on gentoo.
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.0.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.1
     # Run in single-node config.
     environment:
       - discovery.type=single-node
@@ -59,3 +77,7 @@ services:
     image: redis:4.0.6
     ports:
       - 6379
+
+volumes:
+  portage:
+  portage-git:

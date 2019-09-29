@@ -46,10 +46,10 @@
       </small>
       <% unless (changelog_entry = matching_changelog_entry(change)).nil? %>
       <div class="kk-inline-changelog-entry">
-        <a href="<%= gitweb_commit_url(changelog_entry[:id]) %>" title="<%= t :git_commit %>">
+        <a href="<%= gitweb_commit_url(changelog_entry.id) %>" title="<%= t :git_commit %>">
           <span class="octicon octicon-git-pull-request"></span>
           <span class="kk-commit-message">
-          <%= changelog_entry[:message].lines.first %>
+          <%= changelog_entry.message.lines.first %>
           </span>
         </a>
       </div>

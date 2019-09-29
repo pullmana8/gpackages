@@ -12,7 +12,7 @@
 <% cache("keyworded-full-#{@arch}-#{@changes.hash}") do %>
   <ul class="list-group">
     <% @changes.each do |change|
-         _package = Package.find_by(:atom, cp_to_atom(change.category, change.package)) %>
+         _package = PackageRepository.find_by(:atom, cp_to_atom(change.category, change.package)) %>
       <%= render partial: 'packages/changed_package', object: change, as: 'change', locals: { package: _package, version: _package.version(change.version) } %>
     <% end %>
   </ul>

@@ -1,25 +1,52 @@
-require 'searchkick'
+require 'date'
 
 class Version
-  #  include Elasticsearch::Persistence::Model
-  include Kkuleomi::Store::Model
+  include ActiveModel::Model
+  include ActiveModel::Validations
   include Kkuleomi::Store::Models::VersionImport
 
-  searchkick index_name: "versions-#{Rails.env}"
+  ATTRIBUTES = [:id,
+                :created_at,
+                :updated_at,
+                :version,
+                :package,
+                :atom,
+                :sort_key,
+                :slot,
+                :subslot,
+                :eapi,
+                :keywords,
+                :masks,
+                :use,
+                :restrict,
+                :properties,
+                :metadata_hash]
+  attr_accessor(*ATTRIBUTES)
+  attr_reader :attributes
 
-  # attribute :version,       String,  mapping: { type: 'keyword' }
-  # attribute :package,       String,  mapping: { type: 'keyword' }
-  # attribute :atom,          String,  mapping: { type: 'keyword' }
-  # attribute :sort_key,      Integer, mapping: { type: 'integer' }
-  # attribute :slot,          String,  mapping: { type: 'keyword' }
-  # attribute :subslot,       String,  mapping: { type: 'keyword' }
-  # attribute :eapi,          String,  mapping: { type: 'keyword' }
-  # attribute :keywords,      String,  mapping: { type: 'keyword' }
-  # attribute :masks,         Array,   default: [], mapping: { type: 'object' }
-  # attribute :use,           String,  default: [], mapping: { type: 'keyword' }
-  # attribute :restrict,      String,  default: [], mapping: { type: 'keyword' }
-  # attribute :properties,    String,  default: [], mapping: { type: 'keyword' }
-  # attribute :metadata_hash, String,  mapping: { type: 'keyword' }
+  validates :version, presence: true
+
+  def initialize(attr={})
+    attr.each do |k,v|
+      if ATTRIBUTES.include?(k.to_sym)
+        send("#{k}=", v)
+      end
+    end
+  end
+
+  def attributes
+    @id = @atom
+    @created_at ||= DateTime.now
+    @updated_at = DateTime.now
+
+    ATTRIBUTES.inject({}) do |hash, attr|
+      if value = send(attr)
+        hash[attr] = value
+      end
+      hash
+    end
+  end
+  alias :to_hash :attributes
 
   # Returns the keywording state on a given architecture
   #
@@ -140,14 +167,14 @@ class Version
   def calc_useflags
     result = { local: {}, global: {}, use_expand: {} }
 
-    local_flag_map = Useflag.local_for(atom.gsub("-#{version}", ''))
+    local_flag_map = UseflagRepository.local_for(atom.gsub("-#{version}", ''))
     local_flags = local_flag_map.keys
 
     use.sort.each do |flag|
       if local_flags.include? flag
         result[:local][flag] = local_flag_map[flag].to_hsh
       else
-        useflag = Useflag.find_by(:name, flag)
+        useflag = UseflagRepository.find_by(:name, flag)
 
         # This should not happen, but let's be sure
         next unless useflag

@@ -25,7 +25,7 @@
               <%= package.description %>
             </p>
 
-            <% unless package.homepage.empty? || package.homepage.first.nil? || package.homepage.first.empty? %>
+            <% unless package.homepage.nil? || package.homepage.first.nil? || package.homepage.first.empty? %>
             <p class="kk-package-homepage">
               <%= content_tag :a, package.homepage.first, href: package.homepage.first, rel: 'nofollow' %>
             </p>

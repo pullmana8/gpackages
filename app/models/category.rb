@@ -1,14 +1,41 @@
 require 'searchkick'
 
 class Category
-  #  include Elasticsearch::Persistence::Model
-  include Kkuleomi::Store::Model
+  include ActiveModel::Model
+  include ActiveModel::Validations
 
-  searchkick index_name: "categories-#{Rails.env}"
+  ATTRIBUTES = [:id,
+                :created_at,
+                :updated_at,
+                :name,
+                :description,
+                :metadata_hash]
+  attr_accessor(*ATTRIBUTES)
+  attr_reader :attributes
 
-  # attribute :name,          String, mapping: { type: 'keyword' }
-  # attribute :description,   String, mapping: { type: 'text' }
-  # attribute :metadata_hash, String, mapping: { type: 'text' }
+  validates :name, presence: true
+
+  def initialize(attr={})
+    attr.each do |k,v|
+      if ATTRIBUTES.include?(k.to_sym)
+        send("#{k}=", v)
+      end
+    end
+  end
+
+  def attributes
+    @id = @name
+    @created_at ||= DateTime.now
+    @updated_at = DateTime.now
+    ATTRIBUTES.inject({}) do |hash, attr|
+      if value = send(attr)
+        hash[attr] = value
+      end
+      hash
+    end
+  end
+  alias :to_hash :attributes
+
 
   # Determines if the document model needs an update from the repository model
   #
@@ -31,7 +58,7 @@ class Category
   # @param [Portage::Repository::Category] category_model Input category model
   def import!(category_model)
     import(category_model)
-    save
+    CategoryRepository.save(self)
   end
 
   # Returns the URL parameter for referencing this package (Rails internal stuff)

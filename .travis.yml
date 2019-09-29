@@ -1,6 +1,7 @@
 language: ruby
 cache: bundler
 rvm:
+  - 2.4
   - 2.5
 
 gemfiles:
@@ -15,8 +16,17 @@ services:
   - elasticsearch
   - redis-server
 
+before_install:
+    - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+    - gem install bundler -v '< 2'
+    - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.3.0.deb && sudo dpkg -i --force-confnew elasticsearch-6.3.0.deb && sudo service elasticsearch restart
+
+
 before_script:
   - cp config/secrets.yml.dist config/secrets.yml
   # Wait for Elasticsearch
   - sleep 10
-  - bundle exec rake kkuleomi:index:init
+
+script:
+  - bundle exec rubocop
+  - bundle exec rake kkuleomi:index:init RAILS_ENV=test

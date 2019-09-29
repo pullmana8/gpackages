@@ -1,8 +1,18 @@
 #!/bin/bash
 
-bundle install --deployment
-bundle exec rake tmp:create
-bundle exec rake assets:precompile
-bundle exec rake kkuleomi:index:init
-bundle exec rake kkuleomi:seed:all
-./update-all.sh
+# Wait for Elasticsearch to start up
+sleep 30
+
+bundler install
+bundle exec rake tmp:create RAILS_ENV=${1:-development}
+bundle exec rake assets:precompile RAILS_ENV=${1:-development}
+bundle exec rake kkuleomi:index:init RAILS_ENV=${1:-development}
+./bin/update-all.sh ${1:-development}
+
+if [[ "${1:-development}" == "production" ]]
+then
+  crontab -l | { cat; echo "*/10 * * * * /var/www/packages.gentoo.org/htdocs/bin/update-all.sh ${1:-development}"; } | crontab -
+fi
+
+# Finally start the http server when the index is initialized
+bundle exec thin start -p 5000
