@@ -2,7 +2,7 @@ FROM gentoo/portage:latest as portage
 FROM gentoo/stage3-amd64
 
 # Need a portage tree to build, use last nights.
-COPY --from=portage /usr/portage /usr/portage
+COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
 # Sandbox doesn't work well in docker.
 
 ENV FEATURES="-userpriv -usersandbox -sandbox"
@@ -26,5 +26,5 @@ RUN cp /var/www/packages.gentoo.org/htdocs/config/secrets.yml.dist /var/www/pack
 RUN sed -i 's/set_me/ENV["SECRET_KEY_BASE"]/'g /var/www/packages.gentoo.org/htdocs/config/secrets.yml
 
 # Precompile our assets.
-RUN rake assets:precompile
+RUN bundle exec rake assets:precompile
 CMD ["bundler", "exec", "thin", "start"]

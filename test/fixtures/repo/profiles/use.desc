@@ -1,0 +1,2 @@
+test - Enable dependencies and/or preparations necessary to run tests (usually controlled by FEATURES=test but can be toggled independently)
+

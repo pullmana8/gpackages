@@ -1,4 +1,4 @@
-class PackageRemovalJob < ActiveJob::Base
+class PackageRemovalJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
