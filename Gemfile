@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 # Use SCSS for stylesheets
-gem 'sassc-rails', '~> 2.0'
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -18,13 +18,13 @@ gem 'jquery-rails', '~> 4.3.5'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.9', '>= 2.9.1'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 1.0', group: :doc
 
 # packages stuff
 gem 'elasticsearch-rails', '~> 5.0'
-gem 'elasticsearch-persistence', '~> 5.0'
+gem 'elasticsearch-persistence', '~> 5.1', '>= 5.1.0'
 
 gem 'git'
 gem 'nokogiri'
@@ -35,7 +35,7 @@ gem 'sidekiq', require: false
 gem 'rdiscount'
 
 # UI
-gem 'octicons_helper'
+gem 'octicons_helper', '>= 9.1.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -53,7 +53,7 @@ group :development do
   gem 'listen'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 3.0'
+  gem 'web-console', '~> 3.7', '>= 3.7.0'
 
   # Rubocop modules to help with consistent style and to avoid common
   # issues.
@@ -63,9 +63,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.7', '>= 3.7.0'
 end
 
 group :test do
-  gem 'rails-controller-testing'
+  gem 'rails-controller-testing', '>= 1.0.4'
 end
