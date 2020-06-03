@@ -35,7 +35,7 @@ gem 'sidekiq', require: false
 gem 'rdiscount'
 
 # UI
-gem 'octicons_helper'
+gem 'octicons_helper', '>= 9.1.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
